@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : AManager
+public class InputManager : AManager
 {
     public override void Initialize()
     {
