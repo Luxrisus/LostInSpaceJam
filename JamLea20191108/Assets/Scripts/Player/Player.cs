@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour, ILinkable
 {
+#region variables
     [SerializeField]
     private float _speed = 5f;
 
@@ -16,20 +18,28 @@ public class Player : MonoBehaviour, ILinkable
 
     private ATransportableElement _currentElementInPossession = null;
 
+    [SerializeField]
+    private OxygenComponent _oxygenComponent = null;
+#endregion
+
+
     void Start()
     {
-
+        Assert.IsNotNull(_oxygenComponent);
     }
 
     void FixedUpdate()
     {
         Vector3 translation = _speed * Time.deltaTime * _direction;
-        
+
         if (_linker != null)
         {
             translation = _linker.GetCorrectedTranslation(this, translation);
         }
         transform.Translate(translation);
+
+        if (_oxygenComponent.OxygenLevel == 0)
+            Die();
     }
 
     public void OnMove(InputValue value)
@@ -41,10 +51,7 @@ public class Player : MonoBehaviour, ILinkable
     public void OnMainAction(InputValue value)
     {
         if (IsLinked())
-        {
-            _linker.RemoveLink(this);
-            _linker = null;
-        }
+            Unlink();
         else
         {
             Linker[] linkers = FindObjectsOfType<Linker>();
@@ -64,24 +71,46 @@ public class Player : MonoBehaviour, ILinkable
             }
 
             if (nearest < _interactionDistance && nearestLinker != null)
-            {
-                nearestLinker.DoInteraction(this);
-                _linker = nearestLinker;
-            }
+                Link(nearestLinker);
         }
     }
 
-#region ILinkable
-    public Vector3 GetPosition()
+#region Linking Logic
+
+    public void Unlink()
     {
-        return transform.position;
+        Assert.IsTrue(IsLinked());
+        _linker.RemoveLink(this);
+        _linker = null;
+        _oxygenComponent.Plugged = false;
+        Debug.Log("Houston, this is Jacky ! Holding my respiration ! Ovaire !");
+    }
+
+    public void Link(Linker linker)
+    {
+        linker.DoInteraction(this);
+        _linker = linker;
+        _oxygenComponent.Plugged = true;
+        Debug.Log("Houston, this is Jacky ! I peux respirer now. Ovaire !");
     }
 
     public bool IsLinked()
     {
         return _linker != null;
     }
-#endregion
+ #endregion
+
+    public void Die()
+    {
+        if (IsLinked())
+            Unlink();
+        Debug.Log("Houston ! I got un problème with the respiration ! AAraaarraAAaaaargh...");
+        Destroy(gameObject);
+    }
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
 
     public void Take(ATransportableElement element)
     {

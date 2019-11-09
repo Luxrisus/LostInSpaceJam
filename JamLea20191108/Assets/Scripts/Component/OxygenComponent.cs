@@ -38,11 +38,10 @@ public class OxygenComponent : MonoBehaviour
     void Start()
     {
         OxygenLevel = OxygenMax;
-        Plugged = false;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Plugged)
         {

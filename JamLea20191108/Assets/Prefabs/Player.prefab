@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1224440556904243778}
   - component: {fileID: 1224440556904243804}
   - component: {fileID: 1224440556904243805}
+  - component: {fileID: 1180349573623976343}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -190,3 +191,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _interactionDistance: 1
+  _oxygenComponent: {fileID: 1180349573623976343}
+--- !u!114 &1180349573623976343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224440556904243807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5da7e261fee62bd44a24d3682eeb37d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DepletionRatePerSecond: 1
+  RefillRatePerSecond: 10
+  Plugged: 0
+  OxygenMax: 10
