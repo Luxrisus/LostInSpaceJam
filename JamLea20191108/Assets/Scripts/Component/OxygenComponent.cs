@@ -7,7 +7,10 @@ public class OxygenComponent : MonoBehaviour
 {
 #region variables
     private float _oxygen;
-    public float DepletionRatePerSecond;    //!< How much oxygen is depleted per second
+    public float DepletionRatePerSecond = 1.0f;    //!< How much oxygen is depleted per second
+    public float RefillRatePerSecond = 10.0f;    //!< How much oxygen is depleted per second
+
+    public bool Plugged;    //!< When plugged, oxgen refills. Unplugged, oxygen expires
 
     //!< Current oxygen level
     public int OxygenLevel
@@ -35,14 +38,24 @@ public class OxygenComponent : MonoBehaviour
     void Start()
     {
         OxygenLevel = OxygenMax;
+        Plugged = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _oxygen -= DepletionRatePerSecond * Time.deltaTime;
-        if (_oxygen <= 0.0f)
-            _oxygen = 0.0f;
+        if (Plugged)
+        {
+            _oxygen += RefillRatePerSecond * Time.deltaTime;
+            if (_oxygen >= OxygenMax)
+                _oxygen = OxygenMax;
+        }
+        else
+        {
+            _oxygen -= DepletionRatePerSecond * Time.deltaTime;
+            if (_oxygen <= 0.0f)
+                _oxygen = 0.0f;
+        }
     }
 
     public bool IsFull()
