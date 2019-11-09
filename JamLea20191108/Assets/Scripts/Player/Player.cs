@@ -11,12 +11,14 @@ public class Player : MonoBehaviour, ILinkable
     [SerializeField]
     private float _interactionDistance = 1f;
 
-    Vector3 _direction = Vector3.zero;
-    Linker _linker = null;
+    private Vector3 _direction = Vector3.zero;
+    private Linker _linker = null;
+
+    private ATransportableElement _currentElementInPossession = null;
 
     void Start()
     {
-        
+
     }
 
     void FixedUpdate()
@@ -46,13 +48,13 @@ public class Player : MonoBehaviour, ILinkable
         else
         {
             Linker[] linkers = FindObjectsOfType<Linker>();
-        
+
             float nearest = float.MaxValue;
             Linker nearestLinker = null;
             foreach (Linker linker in linkers)
             {
                 float distance = Vector3.Distance(linker.GetPosition(), GetPosition());
-                
+
                 if (distance < nearest)
                 {
                     nearest = distance;
@@ -74,10 +76,26 @@ public class Player : MonoBehaviour, ILinkable
     {
         return transform.position;
     }
-    
+
     public bool IsLinked()
     {
         return _linker != null;
     }
 #endregion
+
+    public void Take(ATransportableElement element)
+    {
+        _currentElementInPossession = element;
+    }
+
+    public ATransportableElement GetCurrentTransportableElement()
+    {
+        return _currentElementInPossession;
+    }
+
+    public void RemoveTransportableElement()
+    {
+        _currentElementInPossession = null;
+    }
 }
+
