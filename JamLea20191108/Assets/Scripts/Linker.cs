@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface ILinkable
 {
-    void OnLinkadded();
-    void OnLinkDestroyed();
+    //void OnLinkadded(Linker owner);
+    //void OnLinkDestroyed(Linker owner);
     Vector3 GetPosition();
 
     //bool CanMove(); apply restrictions based on distance and max count
@@ -69,16 +69,16 @@ public class Linker : MonoBehaviour, ILinkable
         //todo
         _links.RemoveAll(l => (l.LinkStart == linkable || l.LinkEnd == linkable));
     }
-
-    public void OnLinkadded()
+    /*
+    public void OnLinkadded(Linker owner)
     {
 
     }
 
-    public void OnLinkDestroyed()
+    public void OnLinkDestroyed(Linker owner)
     {
 
-    }
+    }*/
 
     public Vector3 GetPosition()
     {

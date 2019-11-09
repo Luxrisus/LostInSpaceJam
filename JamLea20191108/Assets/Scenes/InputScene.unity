@@ -296,6 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ad50bfaaacc04418394eeda20f211f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _linkPrefab: {fileID: 3467580815407515389, guid: 17162c6e55e2a1d49828b062ecb95b07,
+    type: 3}
   _maxLink: 3
   _maxDistance: 10
 --- !u!1 &1072907980
@@ -434,72 +436,3 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!1001 &3467580816164731886
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3467580815407515390, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_Name
-      value: Link
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467580815407515388, guid: 17162c6e55e2a1d49828b062ecb95b07,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 17162c6e55e2a1d49828b062ecb95b07, type: 3}
