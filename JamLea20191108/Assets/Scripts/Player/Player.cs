@@ -20,8 +20,9 @@ public class Player : MonoBehaviour, ILinkable
 
     [SerializeField]
     private OxygenComponent _oxygenComponent = null;
-#endregion
 
+    private List<IInteractable> _interactablesElement = new List<IInteractable>();
+#endregion
 
     void Start()
     {
@@ -50,6 +51,11 @@ public class Player : MonoBehaviour, ILinkable
 
     public void OnMainAction(InputValue value)
     {
+        foreach(var element in _interactablesElement)
+        {
+            element.DoInteraction(this);
+        }
+
         if (IsLinked())
             Unlink();
         else
@@ -125,6 +131,24 @@ public class Player : MonoBehaviour, ILinkable
     public void RemoveTransportableElement()
     {
         _currentElementInPossession = null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        IInteractable newInteractable = collision.gameObject.GetComponent<IInteractable>();
+        if (newInteractable != null)
+        {
+            _interactablesElement.Add(newInteractable);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        IInteractable newInteractable = collision.gameObject.GetComponent<IInteractable>();
+        if (newInteractable != null)
+        {
+            _interactablesElement.Remove(newInteractable);
+        }
     }
 }
 

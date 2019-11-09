@@ -6,6 +6,7 @@ public class EndOfLevelShuttle : MonoBehaviour, IInteractable
 {
     public void DoInteraction(Player player)
     {
+        Debug.Log("Test");
         ATransportableElement currentElement = player.GetCurrentTransportableElement();
         Plant plant = (Plant)currentElement;
         if (currentElement != null && plant != null)
