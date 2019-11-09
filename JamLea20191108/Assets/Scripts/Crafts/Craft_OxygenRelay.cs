@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Craft_OxygenRelay : ACraftable
 {
-
     private int _maximumNumberOfElementesConnected = 1;
     private List<GameObject> _playersConnected = new List<GameObject>();
     private List<GameObject> _plantsConnected = new List<GameObject>();
