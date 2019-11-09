@@ -2,16 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ILinkable
-{
-    //void OnLinkadded(Linker owner);
-    //void OnLinkDestroyed(Linker owner);
-    Vector3 GetPosition();
-
-    //bool CanMove(); apply restrictions based on distance and max count
-}
-
-public class Linker : MonoBehaviour, ILinkable
+public class Linker : MonoBehaviour, ILinkable, IInteractable
 {
     [SerializeField]
     private Link _linkPrefab;
@@ -22,7 +13,7 @@ public class Linker : MonoBehaviour, ILinkable
     [SerializeField]
     float _maxDistance = 10f;
     
-    public struct LinkData
+    public class LinkData
     {
         public ILinkable LinkStart;
         public ILinkable LinkEnd;
@@ -33,7 +24,6 @@ public class Linker : MonoBehaviour, ILinkable
             LinkStart = linkStart;
             LinkEnd = linkEnd;
             LinkObject = linkObject;
-
         }
 
         public void Update()
@@ -66,7 +56,13 @@ public class Linker : MonoBehaviour, ILinkable
     
     public void RemoveLink(ILinkable linkable)
     {
-        //todo
+        LinkData data = _links.Find(l => (l.LinkEnd == linkable || l.LinkStart == linkable));
+        
+        if (data != null)
+        {
+            _links.Remove(data);
+            Destroy(data.LinkObject.gameObject);
+        }
         _links.RemoveAll(l => (l.LinkStart == linkable || l.LinkEnd == linkable));
     }
     /*
@@ -83,5 +79,19 @@ public class Linker : MonoBehaviour, ILinkable
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    public bool IsLinked()
+    {
+        return _links.Count > 0;
+    }
+
+    public void DoInteraction(Player player)
+    {
+        ILinkable linkable = player.GetComponent<ILinkable>();
+        if (linkable != null)
+        {
+            AddLink(linkable);
+        }
     }
 }

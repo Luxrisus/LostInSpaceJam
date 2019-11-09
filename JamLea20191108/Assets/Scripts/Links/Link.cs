@@ -24,8 +24,11 @@ public class Link : MonoBehaviour
 
     public void UpdatePosition(Vector2 start, Vector2 end)
     {
-        SetStart(start);
-        SetEnd(end);
+        if (_lineRenderer != null)
+        {
+            SetStart(start);
+            SetEnd(end);
+        }
     }
 
     public float GetDistance()
