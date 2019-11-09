@@ -46,35 +46,36 @@ public class Linker : MonoBehaviour, ILinkable, IInteractable
             linkData.Update();
         }
     }
-    
-    public void AddLink(ILinkable linkable)
-    {
-        Link link = Instantiate(_linkPrefab);
 
-        _links.Add(new LinkData(this, linkable, link));
+    bool CanAddLink()
+    {
+        return _links.Count < _maxLink;
     }
     
-    public void RemoveLink(ILinkable linkable)
+    public bool AddLink(ILinkable linkable)
+    {
+        bool canAddLink = CanAddLink();
+
+        if (canAddLink)
+        {
+            Link link = Instantiate(_linkPrefab);
+            _links.Add(new LinkData(this, linkable, link));
+        }
+        return canAddLink;
+    }
+    
+    public bool RemoveLink(ILinkable linkable)
     {
         LinkData data = _links.Find(l => (l.LinkEnd == linkable || l.LinkStart == linkable));
+        bool linkRemoved = data != null;
         
-        if (data != null)
+        if (linkRemoved)
         {
             _links.Remove(data);
             Destroy(data.LinkObject.gameObject);
         }
-        _links.RemoveAll(l => (l.LinkStart == linkable || l.LinkEnd == linkable));
+        return linkRemoved;
     }
-    /*
-    public void OnLinkadded(Linker owner)
-    {
-
-    }
-
-    public void OnLinkDestroyed(Linker owner)
-    {
-
-    }*/
 
     public Vector3 GetPosition()
     {
