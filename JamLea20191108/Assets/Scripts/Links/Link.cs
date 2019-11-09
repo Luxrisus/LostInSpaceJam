@@ -33,6 +33,10 @@ public class Link : MonoBehaviour
 
     public float GetDistance()
     {
-        return Vector3.Distance(_lineRenderer.GetPosition(0), _lineRenderer.GetPosition(1));
+        if (_lineRenderer != null)
+        {
+            return Vector3.Distance(_lineRenderer.GetPosition(0), _lineRenderer.GetPosition(1));
+        }
+        return 0f;
     }
 }

@@ -409,7 +409,12 @@ PrefabInstance:
     - target: {fileID: 8844067796271376136, guid: 62ec0b39f2adb2f4798074c5353320cc,
         type: 3}
       propertyPath: _maxLink
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8844067796271376136, guid: 62ec0b39f2adb2f4798074c5353320cc,
+        type: 3}
+      propertyPath: _maxDistance
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62ec0b39f2adb2f4798074c5353320cc, type: 3}

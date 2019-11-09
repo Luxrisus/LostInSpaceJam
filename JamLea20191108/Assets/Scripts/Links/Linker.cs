@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Linker : MonoBehaviour, ILinkable, IInteractable
+public class Linker : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private Link _linkPrefab;
@@ -12,14 +11,16 @@ public class Linker : MonoBehaviour, ILinkable, IInteractable
     
     [SerializeField]
     float _maxDistance = 10f;
+
+    float _distanceTotal = 0f;
     
     public class LinkData
     {
-        public ILinkable LinkStart;
+        public Linker LinkStart;
         public ILinkable LinkEnd;
         public Link LinkObject;
         
-        public LinkData(ILinkable linkStart, ILinkable linkEnd, Link linkObject)
+        public LinkData(Linker linkStart, ILinkable linkEnd, Link linkObject)
         {
             LinkStart = linkStart;
             LinkEnd = linkEnd;
@@ -39,11 +40,13 @@ public class Linker : MonoBehaviour, ILinkable, IInteractable
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        _distanceTotal = 0f;
         foreach (LinkData linkData in _links)
         {
             linkData.Update();
+            _distanceTotal += linkData.LinkObject.GetDistance();
         }
     }
 
@@ -66,7 +69,7 @@ public class Linker : MonoBehaviour, ILinkable, IInteractable
     
     public bool RemoveLink(ILinkable linkable)
     {
-        LinkData data = _links.Find(l => (l.LinkEnd == linkable || l.LinkStart == linkable));
+        LinkData data = _links.Find(l => (l.LinkEnd == linkable));
         bool linkRemoved = data != null;
         
         if (linkRemoved)
@@ -77,16 +80,31 @@ public class Linker : MonoBehaviour, ILinkable, IInteractable
         return linkRemoved;
     }
 
+    public Vector3 GetCorrectedTranslation(ILinkable linkable, Vector3 translation)
+    {
+        LinkData linkData = _links.Find(l => (l.LinkEnd == linkable));
+
+        if (linkData != null)
+        {
+            float currentDistance = linkData.LinkObject.GetDistance();
+            float nextDistance = (linkData.LinkEnd.GetPosition() + translation).magnitude;
+
+            float diffDistance = nextDistance - currentDistance;
+            if ((_distanceTotal + diffDistance) > _maxDistance)
+            {
+                Vector3 newPos = (linkable.GetPosition() + translation - GetPosition()).normalized * currentDistance;
+                translation = newPos - linkable.GetPosition();
+            }
+        }
+        return translation;
+    }
+    
     public Vector3 GetPosition()
     {
         return transform.position;
     }
 
-    public bool IsLinked()
-    {
-        return _links.Count > 0;
-    }
-
+#region IInteractable
     public void DoInteraction(Player player)
     {
         ILinkable linkable = player.GetComponent<ILinkable>();
@@ -95,4 +113,5 @@ public class Linker : MonoBehaviour, ILinkable, IInteractable
             AddLink(linkable);
         }
     }
+#endregion
 }

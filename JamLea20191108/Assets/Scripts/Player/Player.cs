@@ -21,7 +21,13 @@ public class Player : MonoBehaviour, ILinkable
 
     void FixedUpdate()
     {
-        transform.Translate(_speed * Time.deltaTime * _direction);
+        Vector3 translation = _speed * Time.deltaTime * _direction;
+        
+        if (_linker != null)
+        {
+            translation = _linker.GetCorrectedTranslation(this, translation);
+        }
+        transform.Translate(translation);
     }
 
     public void OnMove(InputValue value)
@@ -63,6 +69,7 @@ public class Player : MonoBehaviour, ILinkable
         }
     }
 
+#region ILinkable
     public Vector3 GetPosition()
     {
         return transform.position;
@@ -72,4 +79,5 @@ public class Player : MonoBehaviour, ILinkable
     {
         return _linker != null;
     }
+#endregion
 }
