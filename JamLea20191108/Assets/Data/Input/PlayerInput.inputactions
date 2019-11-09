@@ -14,9 +14,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MainAction",
+                    "name": "LinkAction",
                     "type": "Button",
                     "id": "865deb5e-a976-4056-84d6-be41a41e0559",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MainAction",
+                    "type": "Button",
+                    "id": "8074a078-3614-4dfd-99fa-e5fb937f0879",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -158,6 +166,28 @@
                 {
                     "name": "",
                     "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "LinkAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05f6913d-c316-48b2-a6bb-e225f14c7960",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "LinkAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24e54359-dfa8-4262-be68-db526e9573b7",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
@@ -168,7 +198,7 @@
                 },
                 {
                     "name": "",
-                    "id": "05f6913d-c316-48b2-a6bb-e225f14c7960",
+                    "id": "b7c147d9-e149-4717-a079-6a7ca691b4d6",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",

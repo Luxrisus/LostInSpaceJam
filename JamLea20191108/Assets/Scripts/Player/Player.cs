@@ -21,7 +21,7 @@ public class Player : MonoBehaviour, ILinkable
     [SerializeField]
     private OxygenComponent _oxygenComponent = null;
 
-    private List<IInteractable> _interactablesElement = new List<IInteractable>();
+    private List<GameObject> _interactablesElement = new List<GameObject>();
 #endregion
 
     void Start()
@@ -49,55 +49,53 @@ public class Player : MonoBehaviour, ILinkable
         _direction = new Vector3(move.x, move.y, 0f);
     }
 
-    public void OnMainAction(InputValue value)
+    public void OnLinkAction(InputValue value)
     {
-        foreach(var element in _interactablesElement)
+        if (_linker != null)
         {
-            element.DoInteraction(this);
-        }
-
-        if (IsLinked())
             Unlink();
+        }
         else
         {
-            Linker[] linkers = FindObjectsOfType<Linker>();
-
-            float nearest = float.MaxValue;
-            Linker nearestLinker = null;
-            foreach (Linker linker in linkers)
+            foreach (GameObject element in _interactablesElement)
             {
-                float distance = Vector3.Distance(linker.GetPosition(), GetPosition());
-
-                if (distance < nearest)
+                Linker linker = element.GetComponent<Linker>();
+                if (linker != null)
                 {
-                    nearest = distance;
-                    nearestLinker = linker;
+                    linker.DoInteraction(this);
                 }
-                nearest = Mathf.Min(nearest, distance);
             }
-
-            if (nearest < _interactionDistance && nearestLinker != null)
-                Link(nearestLinker);
         }
+    }
+
+    public void OnMainAction(InputValue value)
+    {
+        Debug.Log("Main action !");
     }
 
 #region Linking Logic
 
-    public void Unlink()
+    public void OnUnlink(Linker owner)
     {
         Assert.IsTrue(IsLinked());
-        _linker.RemoveLink(this);
         _linker = null;
         _oxygenComponent.Plugged = false;
         Debug.Log("Houston, this is Jacky ! Holding my respiration ! Ovaire !");
     }
 
-    public void Link(Linker linker)
+    public void OnLink(Linker linker)
     {
-        linker.DoInteraction(this);
         _linker = linker;
         _oxygenComponent.Plugged = true;
         Debug.Log("Houston, this is Jacky ! I peux respirer now. Ovaire !");
+    }
+    
+    public void Unlink()
+    {
+        if (IsLinked())
+        {
+            _linker.RemoveLink(this);
+        }
     }
 
     public bool IsLinked()
@@ -108,8 +106,7 @@ public class Player : MonoBehaviour, ILinkable
 
     public void Die()
     {
-        if (IsLinked())
-            Unlink();
+        Unlink();
         Debug.Log("Houston ! I got un problème with the respiration ! AAraaarraAAaaaargh...");
         Destroy(gameObject);
     }
@@ -138,7 +135,7 @@ public class Player : MonoBehaviour, ILinkable
         IInteractable newInteractable = collision.gameObject.GetComponent<IInteractable>();
         if (newInteractable != null)
         {
-            _interactablesElement.Add(newInteractable);
+            _interactablesElement.Add(collision.gameObject);
         }
     }
 
@@ -147,7 +144,7 @@ public class Player : MonoBehaviour, ILinkable
         IInteractable newInteractable = collision.gameObject.GetComponent<IInteractable>();
         if (newInteractable != null)
         {
-            _interactablesElement.Remove(newInteractable);
+            _interactablesElement.Remove(collision.gameObject);
         }
     }
 }

@@ -54,6 +54,11 @@ public class Linker : MonoBehaviour, IInteractable
     {
         return _links.Count < _maxLink;
     }
+
+    public bool IsLinked(ILinkable linkable)
+    {
+        return _links.Find(l => (l.LinkEnd == linkable)) != null;
+    }
     
     public bool AddLink(ILinkable linkable)
     {
@@ -63,6 +68,7 @@ public class Linker : MonoBehaviour, IInteractable
         {
             Link link = Instantiate(_linkPrefab);
             _links.Add(new LinkData(this, linkable, link));
+            linkable.OnLink(this);
         }
         return canAddLink;
     }
@@ -76,6 +82,7 @@ public class Linker : MonoBehaviour, IInteractable
         {
             _links.Remove(data);
             Destroy(data.LinkObject.gameObject);
+            linkable.OnUnlink(this);
         }
         return linkRemoved;
     }
@@ -110,7 +117,14 @@ public class Linker : MonoBehaviour, IInteractable
         ILinkable linkable = player.GetComponent<ILinkable>();
         if (linkable != null)
         {
-            AddLink(linkable);
+            if (IsLinked(player))
+            {
+                RemoveLink(linkable);
+            }
+            else
+            {
+                AddLink(linkable);
+            }
         }
     }
 #endregion
