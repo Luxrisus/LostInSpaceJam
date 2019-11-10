@@ -21,8 +21,6 @@ public class Player : MonoBehaviour, ILinkable
     private OxygenComponent _oxygenComponent = null;
 
     private List<GameObject> _interactablesElement = new List<GameObject>();
-    private Vector3 _direction = Vector3.zero;
-    private Linker _linker = null;
     private SpriteRenderer _spriteRenderer;
     private ATransportableElement _currentElementInPossession = null;
     private PlayerHud _playerHud;
