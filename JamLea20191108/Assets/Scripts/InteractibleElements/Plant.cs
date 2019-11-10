@@ -7,7 +7,11 @@ public class Plant : ATransportableElement, IInteractable
 #region IInteractable
     public void DoInteraction(Player player)
     {
-        player.Take(this);
+        ObjectHolder holder = player.GetComponent<ObjectHolder>();
+        if (holder != null)
+        {
+            player.GetComponent<ObjectHolder>().Take(this);
+        }
     }
 
     public bool CanInteract()

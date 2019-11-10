@@ -7,9 +7,16 @@ public class EndOfLevelShuttle : MonoBehaviour, IInteractable
     public void DoInteraction(Player player)
     {
         Debug.Log("Test");
-        ATransportableElement currentElement = player.GetCurrentTransportableElement();
+        
+        ATransportableElement currentElement = null;
+        ObjectHolder holder = player.GetComponent<ObjectHolder>();
+        if (holder != null)
+        {
+            currentElement = holder.GetCurrentTransportableElement();
+        }
+
         Plant plant = (Plant)currentElement;
-        if (currentElement != null && plant != null)
+        if (plant != null)
         {
             PutPlant(plant);
         }

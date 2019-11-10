@@ -13,6 +13,8 @@ public class Linker : MonoBehaviour, IInteractable
     float _maxDistance = 10f;
 
     float _distanceTotal = 0f;
+
+    private ObjectHolder _objectHolder;
     
     public class LinkData
     {
@@ -37,7 +39,7 @@ public class Linker : MonoBehaviour, IInteractable
 
     void Start()
     {
-        
+        _objectHolder = GetComponent<ObjectHolder>();
     }
 
     void FixedUpdate()

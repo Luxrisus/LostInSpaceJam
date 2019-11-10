@@ -4,22 +4,26 @@ using UnityEngine;
 
 public abstract class ATransportableElement : MonoBehaviour
 {    
-    Transform _owner = null;
+    ObjectHolder _holder = null;
 
-    public void Take(Transform jointToAssign)
+    public void Take(ObjectHolder holder)
     {
-        _owner = jointToAssign;
-        this.transform.SetParent(jointToAssign);
+        if (_holder != null)
+        {
+            _holder.RemoveTransportableElement();
+        }
+        _holder = holder;
+        this.transform.SetParent(holder.transform);
     }
 
     public void Release()
     {
-        _owner = null;
+        _holder = null;
         this.transform.SetParent(null);
     }
 
     public bool IsCarried()
     {
-        return _owner != null;
+        return _holder != null;
     }
 }

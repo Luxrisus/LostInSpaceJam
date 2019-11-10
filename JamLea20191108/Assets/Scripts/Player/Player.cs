@@ -16,7 +16,7 @@ public class Player : MonoBehaviour, ILinkable
     private Vector3 _direction = Vector3.zero;
     private Linker _linker = null;
 
-    private ATransportableElement _currentElementInPossession = null;
+    private ObjectHolder _objectHolder;
 
     [SerializeField]
     private OxygenComponent _oxygenComponent = null;
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour, ILinkable
     void Start()
     {
         Assert.IsNotNull(_oxygenComponent);
+        _objectHolder = GetComponent<ObjectHolder>();
     }
 
     void FixedUpdate()
@@ -77,10 +78,27 @@ public class Player : MonoBehaviour, ILinkable
     // Interact with every IInteractable except Linker
     public void OnMainAction(InputValue value)
     {
-        // Can't do interaction if the player carry something
-        if (_currentElementInPossession != null)
+        // If the player carry something try to give the object
+        if (_objectHolder != null && _objectHolder.HasObject())
         {
-            RemoveTransportableElement();
+            ObjectHolder newHolder = null;
+            foreach (GameObject element in _interactablesElement)
+            {
+                newHolder = element.GetComponent<ObjectHolder>();
+                if (newHolder != null)
+                {
+                    break;
+                }
+            }
+            
+            if (newHolder != null)
+            {
+                newHolder.TakeFrom(_objectHolder);
+            }
+            else
+            {
+                _objectHolder.RemoveTransportableElement();
+            }
         }
         else
         {
@@ -88,7 +106,7 @@ public class Player : MonoBehaviour, ILinkable
             {
                 IInteractable interactable = element.GetComponent<IInteractable>();
                 Linker linker = element.GetComponent<Linker>();
-                if (_currentElementInPossession == null && interactable != null && interactable.CanInteract() && linker == null)
+                if (!_objectHolder.HasObject() && interactable != null && interactable.CanInteract() && linker == null)
                 {
                     interactable.DoInteraction(this);
                 }
@@ -139,28 +157,6 @@ public class Player : MonoBehaviour, ILinkable
     public Vector3 GetPosition()
     {
         return transform.position;
-    }
-
-    public bool IsInteracting()
-    {
-        return GetCurrentTransportableElement() != null;
-    }
-
-    public void Take(ATransportableElement element)
-    {
-        element.Take(transform);
-        _currentElementInPossession = element;
-    }
-
-    public ATransportableElement GetCurrentTransportableElement()
-    {
-        return _currentElementInPossession;
-    }
-
-    public void RemoveTransportableElement()
-    {
-        _currentElementInPossession.Release();
-        _currentElementInPossession = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

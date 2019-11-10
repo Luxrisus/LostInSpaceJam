@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1224440556904243804}
   - component: {fileID: 1224440556904243805}
   - component: {fileID: 1180349573623976343}
+  - component: {fileID: -3349879002408313688}
   - component: {fileID: 3494909233414069095}
   - component: {fileID: 7550172088300222870}
   - component: {fileID: 8893694833733896194}
@@ -212,6 +213,18 @@ MonoBehaviour:
   RefillRatePerSecond: 10
   Plugged: 0
   OxygenMax: 10
+--- !u!114 &-3349879002408313688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224440556904243807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7705e0fd22fc40446a073b3907757b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &3494909233414069095
 CircleCollider2D:
   m_ObjectHideFlags: 0
