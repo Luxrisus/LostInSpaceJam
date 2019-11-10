@@ -39,6 +39,17 @@ public class Plant : ATransportableElement, ILinkable
         _waterHud.WaterIndicator.fillAmount = (float)_waterComponent.WaterLevel / (float)_waterComponent.WaterMax;
     }
 
+    public bool AddWater(Water water)
+    {
+        if (water != null)
+        {
+            _waterComponent.Add(water.Quantity);
+            Destroy(water.gameObject);
+            return true;
+        }
+        return false;
+    }
+
     public void OnUnlink(Linker owner)
     {
         _linker = null;

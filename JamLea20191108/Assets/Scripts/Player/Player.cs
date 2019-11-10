@@ -95,6 +95,15 @@ public class Player : MonoBehaviour, ILinkable
             ObjectHolder newHolder = null;
             foreach (GameObject element in _interactablesElement)
             {
+                Plant plant = element.GetComponent<Plant>();
+                if (plant != null)
+                {
+                    if (plant.AddWater((Water)_objectHolder.GetCurrentTransportableElement()))
+                    {
+                        break;
+                    }
+                }
+
                 newHolder = element.GetComponent<ObjectHolder>();
                 if (newHolder != null)
                 {

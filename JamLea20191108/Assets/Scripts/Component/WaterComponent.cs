@@ -54,6 +54,11 @@ public class WaterComponent : MonoBehaviour
         }
     }
 
+    public void Add(float quantity)
+    {
+        _water = Mathf.Clamp(_water + quantity, 0f, WaterMax);
+    }
+
     public int WaterPercentage
     {
         get

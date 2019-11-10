@@ -9,7 +9,7 @@ public class ATransportableElement : MonoBehaviour, IInteractable
     Rigidbody2D _rigidBody = null;
 
     #region IInteractable
-    public void DoInteraction(Player player)
+    public virtual void DoInteraction(Player player)
     {
         ObjectHolder holder = player.GetComponent<ObjectHolder>();
         if (holder != null)
