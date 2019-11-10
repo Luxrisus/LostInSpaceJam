@@ -9,7 +9,7 @@ public class OxygenComponent : MonoBehaviour
     private float _oxygen;
     public float DepletionRatePerSecond = 1.0f;    //!< How much oxygen is depleted per second
     public float RefillRatePerSecond = 10.0f;    //!< How much oxygen is depleted per second
-
+    public float OxygenMovementDepletionFactor = 1.25f;
     public bool Plugged;    //!< When plugged, oxgen refills. Unplugged, oxygen expires
 
     //!< Current oxygen level
@@ -32,12 +32,16 @@ public class OxygenComponent : MonoBehaviour
             return Mathf.RoundToInt(_oxygen / OxygenMax);
         }
     }
+
+    private Vector3 _lastPosition;
+
 #endregion
 
 #region publicMethods
     void Start()
     {
         OxygenLevel = OxygenMax;
+        _lastPosition = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -53,11 +57,22 @@ public class OxygenComponent : MonoBehaviour
             }
             else
             {
-                _oxygen -= DepletionRatePerSecond * Time.deltaTime;
+                float depletion;
+
+                if (transform.localPosition != _lastPosition)
+                {
+                    depletion = DepletionRatePerSecond * OxygenMovementDepletionFactor;
+                }
+                else
+                {
+                    depletion = DepletionRatePerSecond;
+                }
+
+                depletion *= Time.deltaTime;
+                _oxygen -= depletion;
                 if (_oxygen <= 0.0f)
                     _oxygen = 0.0f;
             }
-
         }
     }
 
