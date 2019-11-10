@@ -18,9 +18,10 @@ public class ObjectHolder : MonoBehaviour
 
     public void Take(ATransportableElement element)
     {
-        element.Take(this);
         _currentElementInPossession = element;
+        element.Take(this);
 
+        bool isLinked = false;
         // Create a link if possible
         Linker linker = GetComponent<Linker>();
         if (linker != null)
@@ -29,7 +30,13 @@ public class ObjectHolder : MonoBehaviour
             if (linkable != null && !linkable.IsLinked())
             {
                 linker.AddLink(linkable);
+                isLinked = true;
             }
+        }
+
+        // TODO
+        if (!isLinked)
+        {
         }
         OnObjectTaken.Invoke(element);
     }

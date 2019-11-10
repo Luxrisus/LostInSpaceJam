@@ -112,13 +112,27 @@ public class Player : MonoBehaviour, ILinkable
         }
         else
         {
-            foreach (GameObject element in _interactablesElement)
+            // If the player is not carrying an object
+            if (!_objectHolder.HasObject())
             {
-                IInteractable interactable = element.GetComponent<IInteractable>();
-                Linker linker = element.GetComponent<Linker>();
-                if (!_objectHolder.HasObject() && interactable != null && interactable.CanInteract() && linker == null)
+                foreach (GameObject element in _interactablesElement)
                 {
-                    interactable.DoInteraction(this);
+                    IInteractable interactable = element.GetComponent<IInteractable>();
+                    Linker linker = element.GetComponent<Linker>();
+
+                    // if it's a linker try to take the object from it
+                    if (linker != null)
+                    {
+                        ObjectHolder holder = linker.GetComponent<ObjectHolder>();
+                        if (holder != null)
+                        {
+                            _objectHolder.TakeFrom(holder);
+                        }
+                    }
+                    else if (interactable != null && interactable.CanInteract())
+                    {
+                        interactable.DoInteraction(this);
+                    }
                 }
             }
         }
