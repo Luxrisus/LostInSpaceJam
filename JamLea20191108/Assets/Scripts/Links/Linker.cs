@@ -130,5 +130,22 @@ public class Linker : MonoBehaviour, IInteractable
     {
         return _links.Count < _maxLink;
     }
-#endregion
+    #endregion
+
+    private void OnDestroy()
+    {
+        var linksToDelete = new List<ILinkable>();
+
+        foreach(var link in _links)
+        {
+            linksToDelete.Add(link.LinkEnd);
+        }
+
+        foreach(var linkToDelete in linksToDelete)
+        {
+            RemoveLink(linkToDelete);
+        }
+
+        linksToDelete.Clear();
+    }
 }
