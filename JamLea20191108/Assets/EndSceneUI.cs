@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class EndSceneUI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _onWin;
+    private GameObject _onWin = null;
     
     [SerializeField]
-    private GameObject _onLoose;
+    private GameObject _onLoose = null;
     
     void Start()
     {

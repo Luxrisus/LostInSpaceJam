@@ -9,7 +9,7 @@ public class MenuEntry : MonoBehaviour
     private Color _selectedColor = Color.red;
     
     [SerializeField]
-    private string _sceneName;
+    private string _sceneName = "";
 
     private Color _currentColor;
 
