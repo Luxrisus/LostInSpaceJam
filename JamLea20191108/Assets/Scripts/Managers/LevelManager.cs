@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum LevelState
+public enum LevelState
 {
     WaitingForBlackhole = 0,
     LevelScrolling,
@@ -78,6 +78,12 @@ public class LevelManager : AManager
     public void EndOfLevel(bool isWin)
     {
         _levelState = LevelState.EndOfGame;
+        _levelScrollingSpeed = 0f;
         ManagersManager.Instance.Get<UIManager>().DisplayEndOfLevelScreen(isWin);
+    }
+
+    public LevelState getLevelState()
+    {
+        return _levelState;
     }
 }

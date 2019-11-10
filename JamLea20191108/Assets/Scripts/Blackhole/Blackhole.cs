@@ -6,17 +6,24 @@ public class Blackhole: MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.GetComponent<Plant>() != null)
+        if (ManagersManager.Instance.Get<LevelManager>().getLevelState() != LevelState.EndOfGame)
         {
-            ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
-        }
-        else if(collision.gameObject.GetComponent<Player>() != null)
-        {
-            collision.gameObject.GetComponent<Player>().Die();
-        }
+            if (collision.gameObject.GetComponent<Plant>() != null)
+            {
+                ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
+            }
+            else if (collision.gameObject.GetComponent<Player>() != null)
+            {
+                collision.gameObject.GetComponent<Player>().Die();
+            }
+            else
+            {
+                Destroy(collision.gameObject);
+            }
+        } 
         else
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
     }
 }

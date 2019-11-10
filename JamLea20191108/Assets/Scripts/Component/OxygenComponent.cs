@@ -43,17 +43,21 @@ public class OxygenComponent : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Plugged)
+        if (ManagersManager.Instance.Get<LevelManager>().getLevelState() != LevelState.EndOfGame)
         {
-            _oxygen += RefillRatePerSecond * Time.deltaTime;
-            if (_oxygen >= OxygenMax)
-                _oxygen = OxygenMax;
-        }
-        else
-        {
-            _oxygen -= DepletionRatePerSecond * Time.deltaTime;
-            if (_oxygen <= 0.0f)
-                _oxygen = 0.0f;
+            if (Plugged)
+            {
+                _oxygen += RefillRatePerSecond * Time.deltaTime;
+                if (_oxygen >= OxygenMax)
+                    _oxygen = OxygenMax;
+            }
+            else
+            {
+                _oxygen -= DepletionRatePerSecond * Time.deltaTime;
+                if (_oxygen <= 0.0f)
+                    _oxygen = 0.0f;
+            }
+
         }
     }
 
