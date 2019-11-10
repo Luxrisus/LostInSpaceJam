@@ -36,6 +36,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ChangeIngredientLeft",
+                    "type": "Button",
+                    "id": "a793775c-7cf3-46ec-9b92-16699af9201b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ChangeIngredientRight",
+                    "type": "Button",
+                    "id": "e0acb028-f931-4998-88d5-04afb6ccb6e2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -223,6 +239,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "MainAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54c73ba6-0050-47c5-ade2-a11a104d45a5",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ChangeIngredientLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ae9532e-ff87-4c9d-8ff4-acb934de4dc5",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ChangeIngredientRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

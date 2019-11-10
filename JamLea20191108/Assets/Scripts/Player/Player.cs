@@ -144,6 +144,17 @@ public class Player : MonoBehaviour, ILinkable
         _isMainActionPressed = value.isPressed;
 
     }
+    
+    public void OnChangeIngredientLeft(InputValue value)
+    {
+        Debug.Log("TODO: OnChangeIngredientLeft");
+    }
+    
+    public void OnChangeIngredientRight(InputValue value)
+    {
+        Debug.Log("TODO: OnChangeIngredientRight");
+    }
+
 #endregion
 
 #region Linking Logic
