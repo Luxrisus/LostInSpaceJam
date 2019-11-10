@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+enum LevelState
+{
+    WaitingForBlackhole = 0,
+    LevelScrolling,
+    EndOfGame
+}
+
 public class LevelManager : AManager
 {
     [SerializeField]
@@ -13,12 +20,13 @@ public class LevelManager : AManager
     private float _timeSinceBeginningOfLevel;
 
     private Blackhole _blackhole;
-    private bool _isBlackHoleOpened = false;
     private GameObject _levelLayout;
+    private LevelState _levelState;
 
     public override void Initialize()
     {
         _timeSinceBeginningOfLevel = 0f;
+        _levelState = LevelState.WaitingForBlackhole;
 
         _blackhole = FindObjectOfType<Blackhole>();
         _levelLayout = FindObjectOfType<LevelLayoutHook>().gameObject;
@@ -32,13 +40,18 @@ public class LevelManager : AManager
 
     void Update()
     {
-        if (!_isBlackHoleOpened)
+        switch (_levelState)
         {
-            UpdateTimeBeforeBlackhole();
-        }
-        else
-        {
-            MoveLevel();
+            case LevelState.WaitingForBlackhole:
+                UpdateTimeBeforeBlackhole();
+                break;
+
+            case LevelState.LevelScrolling:
+                MoveLevel();
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -46,10 +59,10 @@ public class LevelManager : AManager
     {
         _timeSinceBeginningOfLevel += Time.deltaTime;
 
-        if(_timeSinceBeginningOfLevel > _timeBeforeBlackHole && !_isBlackHoleOpened)
+        if(_timeSinceBeginningOfLevel > _timeBeforeBlackHole)
         {
             _blackhole.gameObject.SetActive(true);
-            _isBlackHoleOpened = true;
+            _levelState = LevelState.LevelScrolling;
         }
     }
 
@@ -64,6 +77,7 @@ public class LevelManager : AManager
 
     public void EndOfLevel(bool isWin)
     {
+        _levelState = LevelState.EndOfGame;
         ManagersManager.Instance.Get<UIManager>().DisplayEndOfLevelScreen(isWin);
     }
 }

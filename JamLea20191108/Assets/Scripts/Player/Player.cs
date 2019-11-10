@@ -160,7 +160,11 @@ public class Player : MonoBehaviour, ILinkable
     public void Die()
     {
         Unlink();
-        Debug.Log("Houston ! I got un problème with the respiration ! AAraaarraAAaaaargh...");
+
+        if (_objectHolder.HasObject())
+        {
+            _objectHolder?.RemoveTransportableElement();
+        }
         ManagersManager.Instance.Get<PlayerManager>().PlayerDied(this);
         ManagersManager.Instance.Get<UIManager>().PlayersPanel.PlayerDied(_playerHud);
         Destroy(gameObject);

@@ -51,7 +51,6 @@ public class ObjectHolder : MonoBehaviour
                 linker.RemoveLink(linkable);
             }
         }
-        
         OnObjectReleased.Invoke(_currentElementInPossession);
         _currentElementInPossession.Release();
         _currentElementInPossession = null;
