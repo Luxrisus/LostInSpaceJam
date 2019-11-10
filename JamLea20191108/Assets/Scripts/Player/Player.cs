@@ -167,7 +167,9 @@ public class Player : MonoBehaviour, ILinkable
         }
         ManagersManager.Instance.Get<PlayerManager>().PlayerDied(this);
         ManagersManager.Instance.Get<UIManager>().PlayersPanel.PlayerDied(_playerHud);
-        Destroy(gameObject);
+
+        GetComponent<SpriteRenderer>().enabled = false;
+        this.enabled = false;
     }
 
     public void AddPlayerHud(PlayerHud hud)

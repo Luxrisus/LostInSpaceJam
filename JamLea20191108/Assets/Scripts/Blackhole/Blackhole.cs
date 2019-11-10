@@ -10,12 +10,13 @@ public class Blackhole: MonoBehaviour
         {
             ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
         }
-
-        if(collision.gameObject.GetComponent<Player>() != null)
+        else if(collision.gameObject.GetComponent<Player>() != null)
         {
             collision.gameObject.GetComponent<Player>().Die();
         }
-
-        Destroy(collision.gameObject);
+        else
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }
