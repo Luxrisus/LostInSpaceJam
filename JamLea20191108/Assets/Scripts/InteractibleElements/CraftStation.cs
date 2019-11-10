@@ -5,10 +5,13 @@ using UnityEngine;
 public class CraftStation : ATransportableElement
 {
     [SerializeField]
+    private int initialResources = 2;
+    [SerializeField]
     private GameObject _craftWidgetCanvas = null;
     [SerializeField]
     private CraftWidget _craftWidget = null;
-
+    [SerializeField]
+    private CraftBarWidget _craftBarWidget = null;
     static private Dictionary<Resources, int> _resources;
 
     private List<Blueprint> _blueprints = new List<Blueprint>();
@@ -24,8 +27,8 @@ public class CraftStation : ATransportableElement
         if (_resources == null)
         {
             _resources = new Dictionary<Resources, int>();
-            _resources.Add(Resources.Ice, 2);
-            _resources.Add(Resources.Wood, 0);
+            _resources.Add(Resources.Ice, initialResources);
+            _resources.Add(Resources.Wood, initialResources);
         }
 
         _craftWidgetCanvas.SetActive(false);
@@ -47,6 +50,7 @@ public class CraftStation : ATransportableElement
             {
                 Debug.Log("Start craft");
                 _craftingPlayer = player;
+                _craftBarWidget.Configure(0, blueprint.CraftTimeInSeconds);
                 _craftCor = StartCoroutine(CraftCor(_craftingPlayer, blueprint));
             }
         }
@@ -58,6 +62,8 @@ public class CraftStation : ATransportableElement
         {
             Debug.Log("Stop craft");
             StopCoroutine(_craftCor);
+            _craftCor = null;
+            _craftBarWidget.Clear();
         }
     }
 
@@ -67,8 +73,9 @@ public class CraftStation : ATransportableElement
         while (timer < blueprint.CraftTimeInSeconds)
         {
             timer += Time.deltaTime;
-            // TODO update the UI with ratio = timer / blueprint.CraftTimeInSeconds
-            yield return new WaitForEndOfFrame();
+            _craftBarWidget.SetCurrentValue(timer);
+
+            yield return null;
         }
 
         Debug.Log("Craft done");
@@ -76,6 +83,7 @@ public class CraftStation : ATransportableElement
         ATransportableElement result = Instantiate(blueprint.Result, transform.position, transform.rotation);
         _craftingPlayer.GetComponent<ObjectHolder>().Take(result);
         _craftCor = null;
+        _craftBarWidget.Clear();
         DisplayBlueprint();
     }
 
