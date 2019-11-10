@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ChangeIngredientLeft",
+                    "name": "SelectNextBlueprint",
                     "type": "Button",
                     "id": "a793775c-7cf3-46ec-9b92-16699af9201b",
                     "expectedControlType": "Button",
@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ChangeIngredientRight",
+                    "name": "SelectPrevBlueprint",
                     "type": "Button",
                     "id": "e0acb028-f931-4998-88d5-04afb6ccb6e2",
                     "expectedControlType": "Button",
@@ -249,7 +249,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "ChangeIngredientLeft",
+                    "action": "SelectNextBlueprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -260,7 +260,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "ChangeIngredientRight",
+                    "action": "SelectPrevBlueprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

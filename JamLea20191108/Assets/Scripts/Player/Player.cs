@@ -154,14 +154,14 @@ public class Player : MonoBehaviour, ILinkable
         }
     }
     
-    public void OnChangeIngredientLeft(InputValue value)
+    public void OnSelectNextBlueprint(InputValue value)
     {
-        Debug.Log("TODO: OnChangeIngredientLeft");
+        _craftStation?.NextBlueprint();
     }
     
-    public void OnChangeIngredientRight(InputValue value)
+    public void OnSelectPrevBlueprint(InputValue value)
     {
-        Debug.Log("TODO: OnChangeIngredientRight");
+        _craftStation?.PrevBlueprint();
     }
 
 #endregion

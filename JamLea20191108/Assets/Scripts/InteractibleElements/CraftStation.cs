@@ -117,6 +117,28 @@ public class CraftStation : ATransportableElement, IInteractable
         return _blueprints[_currentBlueprintIndex];
     }
 
+    public void NextBlueprint()
+    {
+        _currentBlueprintIndex++;
+        if (_currentBlueprintIndex >= _blueprints.Count)
+        {
+            _currentBlueprintIndex = 0;
+        }
+        _craftWidget.Clear();
+        _craftWidget.Configure(GetCurrentBlueprint(), _resources);
+    }
+    
+    public void PrevBlueprint()
+    {
+        _currentBlueprintIndex--;
+        if (_currentBlueprintIndex < 0)
+        {
+            _currentBlueprintIndex = _blueprints.Count - 1;
+        }
+        _craftWidget.Clear();
+        _craftWidget.Configure(GetCurrentBlueprint(), _resources);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<Player>() != null)
