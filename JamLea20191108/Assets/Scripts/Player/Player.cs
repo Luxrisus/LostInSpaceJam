@@ -180,7 +180,6 @@ public class Player : MonoBehaviour, ILinkable
         Assert.IsTrue(IsLinked());
         _linker = null;
         _oxygenComponent.Plugged = false;
-        Debug.Log("Houston, this is Jacky ! Holding my respiration ! Ovaire !");
     }
 
     public void OnLink(Linker linker)

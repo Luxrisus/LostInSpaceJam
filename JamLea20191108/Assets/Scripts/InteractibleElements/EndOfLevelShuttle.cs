@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EndOfLevelShuttle : MonoBehaviour, IInteractable
 {
+    public bool IsDetectingPlayerOnCollision = false;
+
     ObjectHolder _holder = null;
 
     void Start()
@@ -24,13 +26,24 @@ public class EndOfLevelShuttle : MonoBehaviour, IInteractable
         if (plant != null)
         {
             ManagersManager.Instance.Get<LevelManager>().EndOfLevel(true);
-            // TODO @Salanyel: Trigger the end of the current game
-            Debug.Log("Plant passed!");
         }
     }
 
     public bool CanInteract()
     {
         return true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (IsDetectingPlayerOnCollision)
+        {
+            var player = collision.gameObject.GetComponent<Player>();
+
+            if (player != null)
+            {
+                ManagersManager.Instance.Get<LevelManager>().EndOfLevel(true);
+            }
+        }
     }
 }

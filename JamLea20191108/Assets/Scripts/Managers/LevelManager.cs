@@ -29,7 +29,11 @@ public class LevelManager : AManager
         _levelState = LevelState.WaitingForBlackhole;
 
         _blackhole = FindObjectOfType<Blackhole>();
-        _levelLayout = FindObjectOfType<LevelLayoutHook>().gameObject;
+        var levelLayout = FindObjectOfType<LevelLayoutHook>();
+        _levelLayout = levelLayout.gameObject;
+
+        _timeBeforeBlackHole = levelLayout.TimeBeforeBlackHole;
+        _levelScrollingSpeed = levelLayout.SideScrollingSpeed;
 
         if(_blackhole!=null)
         {
