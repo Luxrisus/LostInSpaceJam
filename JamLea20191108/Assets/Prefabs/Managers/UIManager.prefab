@@ -47,5 +47,5 @@ MonoBehaviour:
     type: 3}
   DefeatGameScreenPrefab: {fileID: 7564651732992441759, guid: 2e320eef570146741bbc4b5ce04c2504,
     type: 3}
-  _playersPanelPrefab: {fileID: 3227862100706323475, guid: 4008781eab25e264282d90204481acf4,
+  PlayersPanelPrefab: {fileID: 6273046996873633964, guid: 2af0d12a771826a47ac3e348a1bcd70d,
     type: 3}

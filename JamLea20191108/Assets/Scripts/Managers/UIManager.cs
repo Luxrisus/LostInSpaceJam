@@ -10,20 +10,14 @@ public class UIManager : AManager
     public GameObject DefeatGameScreenPrefab;
     private GameObject DefeatGameScreen;
 
-    [SerializeField]
-    PlayersPanel _playersPanelPrefab = null;
-
+    public PlayersPanel PlayersPanelPrefab = null;
     private PlayersPanel _playersPanel;
 
     public PlayersPanel PlayersPanel { get { return _playersPanel; } set { _playersPanel = value; } }
 
-    private Canvas _canvas;
-
     public override void Initialize()
     {
-        _canvas = FindObjectOfType<Canvas>();
-
-        PlayersPanel = Instantiate(_playersPanelPrefab, _canvas.transform);
+        PlayersPanel = Instantiate(PlayersPanelPrefab);
     }
 
     public void DisplayEndOfLevelScreen(bool isWin)
