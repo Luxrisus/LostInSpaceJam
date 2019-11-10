@@ -1,20 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [System.Serializable]
-struct ColorCombination
+public struct ColorCombination
 {
-    Color PrimaryColor;
-    Color SecondaryColor;
+    public Color PrimaryColor;
+    public Color SecondaryColor;
 }
 
 public class PlayerManager : AManager
 {
     [SerializeField]
-    private List<Color> _playerColors = new List<Color>();
-    [SerializeField]
-    private List<ColorCombination> _playersColorsCombination = new List<ColorCombination>();
+    private List<ColorCombination> _playersColors = new List<ColorCombination>();
 
     private List<bool> _colorUsed = new List<bool>();
 
@@ -24,7 +23,7 @@ public class PlayerManager : AManager
     {
         _players.Clear();
 
-        for(int i = 0; i < _playerColors.Count; ++i)
+        for (int i = 0; i < _playersColors.Count; ++i)
         {
             _colorUsed.Add(false);
         }
@@ -48,13 +47,13 @@ public class PlayerManager : AManager
             currentIndex++;
         }
 
-        Color color = _playerColors[currentIndex];
+        ColorCombination color = _playersColors[currentIndex];
         _colorUsed[currentIndex] = true;
 
         _players.Add(player);
 
         player.SetColor(color);
-        var playerHud = ManagersManager.Instance.Get<UIManager>().PlayersPanel.AddPlayerHud(color);
+        var playerHud = ManagersManager.Instance.Get<UIManager>().PlayersPanel.AddPlayerHud(color.PrimaryColor);
         player.AddPlayerHud(playerHud);
         player.transform.SetParent(FindObjectOfType<LevelLayoutHook>().transform);
     }

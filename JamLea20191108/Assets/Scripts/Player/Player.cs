@@ -10,6 +10,13 @@ public class Player : MonoBehaviour, ILinkable
     [SerializeField]
     private float _speed = 5f;
 
+    [SerializeField]
+    private SpriteRenderer _bodyRenderer = null;
+    [SerializeField]
+    private SpriteRenderer _mainRenderer = null;
+    [SerializeField]
+    private SpriteRenderer _secondaryRenderer = null;
+
     private Vector3 _direction = Vector3.zero;
     private Linker _linker = null;
     private ObjectHolder _objectHolder;
@@ -18,7 +25,6 @@ public class Player : MonoBehaviour, ILinkable
     private OxygenComponent _oxygenComponent = null;
 
     private List<GameObject> _interactablesElement = new List<GameObject>();
-    private SpriteRenderer _spriteRenderer;
     private PlayerHud _playerHud;
     private CraftStation _craftStation = null;
 
@@ -26,7 +32,6 @@ public class Player : MonoBehaviour, ILinkable
 
     void Awake()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         ManagersManager.Instance.Get<PlayerManager>().PlayerJoined(this);
     }
 
@@ -213,7 +218,9 @@ public class Player : MonoBehaviour, ILinkable
         ManagersManager.Instance.Get<PlayerManager>().PlayerDied(this);
         ManagersManager.Instance.Get<UIManager>().PlayersPanel.PlayerDied(_playerHud);
 
-        GetComponent<SpriteRenderer>().enabled = false;
+        _bodyRenderer.enabled = false;
+        _mainRenderer.enabled = false;
+        _secondaryRenderer.enabled = false;
         this.enabled = false;
     }
 
@@ -260,9 +267,10 @@ public class Player : MonoBehaviour, ILinkable
     }
 #endregion
 
-    public void SetColor(Color color)
+    public void SetColor(ColorCombination color)
     {
-        _spriteRenderer.color = color;
+        _mainRenderer.color = color.PrimaryColor;
+        _secondaryRenderer.color = color.SecondaryColor;
     }
 
 }
