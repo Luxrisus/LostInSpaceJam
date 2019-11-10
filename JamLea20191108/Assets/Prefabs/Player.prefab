@@ -195,7 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _interactionDistance: 1
   _oxygenComponent: {fileID: 1180349573623976343}
 --- !u!114 &1180349573623976343
 MonoBehaviour:
@@ -225,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7705e0fd22fc40446a073b3907757b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentElementInPossession: {fileID: 0}
 --- !u!58 &3494909233414069095
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -277,4 +277,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 4
