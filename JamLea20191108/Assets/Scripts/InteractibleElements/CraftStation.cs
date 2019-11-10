@@ -73,8 +73,9 @@ public class CraftStation : ATransportableElement
 
         Debug.Log("Craft done");
         ConsumeIngredient(blueprint);
-        ATransportableElement result = Instantiate(blueprint.Result);
+        ATransportableElement result = Instantiate(blueprint.Result, transform.position, transform.rotation);
         _craftingPlayer.GetComponent<ObjectHolder>().Take(result);
+        _craftCor = null;
         DisplayBlueprint();
     }
 
