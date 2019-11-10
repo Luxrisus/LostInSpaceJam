@@ -22,6 +22,16 @@ public class Link : MonoBehaviour
         _lineRenderer.SetPosition(1, new Vector3(end.x, end.y, 0f));
     }
 
+    public Vector3 GetStart()
+    {
+        return _lineRenderer.GetPosition(0);
+    }
+    
+    public Vector3 GetEnd()
+    {
+        return _lineRenderer.GetPosition(1);
+    }
+
     public void UpdatePosition(Vector2 start, Vector2 end)
     {
         if (_lineRenderer != null)

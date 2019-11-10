@@ -96,13 +96,14 @@ public class Linker : MonoBehaviour, IInteractable
         if (linkData != null)
         {
             float currentDistance = linkData.LinkObject.GetDistance();
-            float nextDistance = (linkData.LinkEnd.GetPosition() + translation).magnitude;
+            float nextDistance = Vector3.Distance(linkData.LinkObject.GetStart(), linkData.LinkObject.GetEnd() + translation);
 
             float diffDistance = nextDistance - currentDistance;
             if ((_distanceTotal + diffDistance) > _maxDistance)
             {
-                Vector3 newPos = (linkable.GetPosition() + translation - GetPosition()).normalized * currentDistance;
-                translation = newPos - linkable.GetPosition();
+                Vector3 direction = linkData.LinkObject.GetEnd() - linkData.LinkObject.GetStart();
+                Vector3 newPos = (direction + translation).normalized * currentDistance;
+                translation = newPos - direction;
             }
         }
         return translation;
