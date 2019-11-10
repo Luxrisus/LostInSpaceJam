@@ -83,8 +83,10 @@ public class CraftStation : ATransportableElement, IInteractable
         }
 
         Debug.Log("Craft done");
-        // Remove ingredients
-        // Give the object to the player
+        ConsumeIngredient(blueprint);
+        ATransportableElement result = Instantiate(blueprint.Result);
+        _craftingPlayer.GetComponent<ObjectHolder>().Take(result);
+        DisplayBlueprint();
     }
 
     void OnObjectTaken(ATransportableElement element)
@@ -109,7 +111,26 @@ public class CraftStation : ATransportableElement, IInteractable
 
     public bool CanCraft(Blueprint blueprint)
     {
-        return true;
+        bool canCraft = true;
+        foreach (Ingredient ingredient in blueprint.Ingredients)
+        {
+            int quantity = 0;
+            if (!_resources.TryGetValue(ingredient.Display.Resource, out quantity) || quantity < ingredient.Quantity)
+            {
+                canCraft = false;
+                break;
+            }
+        }
+
+        return canCraft;
+    }
+
+    public void ConsumeIngredient(Blueprint blueprint)
+    {
+        foreach (Ingredient ingredient in blueprint.Ingredients)
+        {
+            _resources[ingredient.Display.Resource] -= ingredient.Quantity;
+        }
     }
 
     public Blueprint GetCurrentBlueprint()

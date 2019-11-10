@@ -25,7 +25,7 @@ public enum Resources
 [CreateAssetMenu(fileName = "Blueprint", menuName = "Craftable Elements/Blueprint", order = 1)]
 public class Blueprint : ScriptableObject
 {
-    public GameObject Result;
+    public ATransportableElement Result;
     public Sprite CraftResult;
     public List<Ingredient> Ingredients;
     public float CraftTimeInSeconds;
