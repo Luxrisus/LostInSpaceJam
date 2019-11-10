@@ -4,12 +4,37 @@ using UnityEngine;
 
 public class CraftStation : ATransportableElement, IInteractable
 {
-    ObjectHolder _holder;
+    [SerializeField]
+    private GameObject _craftWidgetCanvas = null;
+    [SerializeField]
+    private CraftWidget _craftWidget = null;
+
+    static private Dictionary<Resources, int> _resources;
+
+    private ObjectHolder _holder;
+    private List<Blueprint> _blueprints = new List<Blueprint>();
+    private int _numberOfCollisions = 0;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (_resources == null)
+        {
+            _resources = new Dictionary<Resources, int>();
+            _resources.Add(Resources.Ice, 0);
+            _resources.Add(Resources.Wood, 2);
+        }
+
+        _craftWidgetCanvas.SetActive(false);
+
+        _holder = GetComponent<ObjectHolder>();
+        _holder.OnObjectTaken.AddListener(OnObjectTaken);
+    }
 
     void Start()
     {
-        _holder = GetComponent<ObjectHolder>();
-        _holder.OnObjectTaken.AddListener(OnObjectTaken);
+        _blueprints = ManagersManager.Instance.Get<CraftManager>().GetBlueprints();
     }
 
     public void DoInteraction(Player player)
@@ -39,5 +64,33 @@ public class CraftStation : ATransportableElement, IInteractable
     public bool CanInteract()
     {
         return true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Player>() != null)
+        {
+            _numberOfCollisions++;
+
+            if (_numberOfCollisions == 1)
+            {
+                _craftWidgetCanvas.SetActive(true);
+                _craftWidget.Configure(_blueprints[0], _resources);
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Player>() != null)
+        {
+            _numberOfCollisions--;
+
+            if (_numberOfCollisions == 0)
+            {
+                _craftWidget.Clear();
+                _craftWidgetCanvas.SetActive(false);
+            }
+        }
     }
 }

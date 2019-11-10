@@ -8,7 +8,7 @@ public abstract class ATransportableElement : MonoBehaviour
     ObjectHolder _holder = null;
     Rigidbody2D _rigidBody = null;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         _rigidBody = GetComponentInChildren<Rigidbody2D>();
 
