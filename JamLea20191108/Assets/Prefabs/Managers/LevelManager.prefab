@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeBlackHole: 1
-  _levelScrollingSpeed: 0.1
+  _levelScrollingSpeed: 1

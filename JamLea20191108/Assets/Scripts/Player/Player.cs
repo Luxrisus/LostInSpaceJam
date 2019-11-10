@@ -113,7 +113,7 @@ public class Player : MonoBehaviour, ILinkable
         else
         {
             // If the player is not carrying an object
-            if (!_objectHolder.HasObject())
+            if (_objectHolder != null && !_objectHolder.HasObject())
             {
                 foreach (GameObject element in _interactablesElement)
                 {
