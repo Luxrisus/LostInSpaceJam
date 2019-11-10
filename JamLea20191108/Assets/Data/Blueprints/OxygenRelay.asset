@@ -16,3 +16,4 @@ MonoBehaviour:
   Ingredients:
   - Display: {fileID: 11400000, guid: fe12cf9e353278d4299a95d65a24b15f, type: 2}
     Quantity: 2
+  CraftTimeInSeconds: 5

@@ -27,5 +27,5 @@ public class Blueprint : ScriptableObject
 {
     public Sprite CraftResult;
     public List<Ingredient> Ingredients;
-
+    public float CraftTimeInSeconds;
 }

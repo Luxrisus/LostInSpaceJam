@@ -8,6 +8,7 @@ public class CraftWidget : MonoBehaviour
     public Image CraftSprite;
     public Image Background;
     public Transform QuantityWidgetContainer;
+    public Text TimeTakenForCraft;
 
     public Color EnoughResourcesColor;
     public Color NotEnoughResourcesColor;
@@ -39,6 +40,8 @@ public class CraftWidget : MonoBehaviour
             //Background.color = new Color(0, 125, 76, 255);
             Background.color = EnoughResourcesColor;
         }
+
+        TimeTakenForCraft.text = $"Time:\n{blueprint.CraftTimeInSeconds}s";
     }
 
     public bool HasEnoughResources()
