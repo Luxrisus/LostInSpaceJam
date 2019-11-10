@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blueprints:
   - {fileID: 11400000, guid: e7a9e244eab21db4281f1560928d110f, type: 2}
-  _craftables:
-  - {fileID: 1274630080627777158, guid: 0a6cff8f34149e74fa3d87a18c849432, type: 3}
+  - {fileID: 11400000, guid: 9e6fb5c18e10fea49861fd7a766312da, type: 2}
+  _craftables: []

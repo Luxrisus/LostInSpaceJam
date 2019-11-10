@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: ice
+  m_Name: Ice
   m_EditorClassIdentifier: Assembly-CSharp::IngredientDisplay
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2964f01b0397a6f42aef44a576c1312e, type: 3}
   Resource: 0
