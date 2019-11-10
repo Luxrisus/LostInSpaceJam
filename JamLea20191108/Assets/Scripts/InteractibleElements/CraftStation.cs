@@ -14,6 +14,7 @@ public class CraftStation : ATransportableElement, IInteractable
     private ObjectHolder _holder;
     private List<Blueprint> _blueprints = new List<Blueprint>();
     private int _numberOfCollisions = 0;
+    private int _currentBlueprintIndex = 0;
 
     protected override void Awake()
     {
@@ -91,7 +92,7 @@ public class CraftStation : ATransportableElement, IInteractable
             if (_numberOfCollisions == 1)
             {
                 _craftWidgetCanvas.SetActive(true);
-                _craftWidget.Configure(_blueprints[0], _resources);
+                _craftWidget.Configure(_blueprints[_currentBlueprintIndex], _resources);
             }
         }
     }
@@ -104,6 +105,7 @@ public class CraftStation : ATransportableElement, IInteractable
 
             if (_numberOfCollisions == 0)
             {
+                _currentBlueprintIndex = 0;
                 _craftWidget.Clear();
                 _craftWidgetCanvas.SetActive(false);
             }
