@@ -346,7 +346,7 @@ PrefabInstance:
     - target: {fileID: 2413905743617927471, guid: 8f28b2938da2bdf4fa0062493923b4e1,
         type: 3}
       propertyPath: _sceneName
-      value: MaxScene
+      value: Level02OxygenAndCraft
       objectReference: {fileID: 0}
     - target: {fileID: 2413905745622226355, guid: 8f28b2938da2bdf4fa0062493923b4e1,
         type: 3}

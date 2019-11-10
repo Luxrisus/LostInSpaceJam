@@ -7,7 +7,7 @@ public class MenuEntry : MonoBehaviour
 {
     [SerializeField]
     private Color _selectedColor = Color.red;
-    
+
     [SerializeField]
     private string _sceneName = "";
 
@@ -15,7 +15,7 @@ public class MenuEntry : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     public void Select()

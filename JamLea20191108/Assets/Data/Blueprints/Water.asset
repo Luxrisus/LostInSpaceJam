@@ -15,6 +15,6 @@ MonoBehaviour:
   Result: {fileID: 934827352509412558, guid: f8ec0fda9885f6a4fa8f95f10dadbc66, type: 3}
   CraftResult: {fileID: 21300000, guid: d7f9ed102d72a714ca7defed351bf758, type: 3}
   Ingredients:
-  - Display: {fileID: 11400000, guid: d403f7da4393ba242875ed6860a53b3d, type: 2}
+  - Display: {fileID: 11400000, guid: bdf5f6d0766709542a0f3ee67527ea41, type: 2}
     Quantity: 2
   CraftTimeInSeconds: 2

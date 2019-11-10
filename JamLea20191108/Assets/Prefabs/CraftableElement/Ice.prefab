@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce7dd17db60f7b4db19dd755283c04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ingredientDisplay: {fileID: 11400000, guid: d403f7da4393ba242875ed6860a53b3d, type: 2}
+  _ingredientDisplay: {fileID: 11400000, guid: bdf5f6d0766709542a0f3ee67527ea41, type: 2}
   _sprite: {fileID: 2925866557169896983}
 --- !u!50 &1407254302
 Rigidbody2D:

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CraftStation : ATransportableElement
 {
     [SerializeField]
-    private int initialResources = 0;
+    static private int initialResources = 0;
     [SerializeField]
     private GameObject _craftWidgetCanvas = null;
     [SerializeField]
@@ -24,12 +24,7 @@ public class CraftStation : ATransportableElement
     {
         base.Awake();
 
-        if (_resources == null)
-        {
-            _resources = new Dictionary<Resources, int>();
-            _resources.Add(Resources.Ice, initialResources);
-            _resources.Add(Resources.Wood, initialResources);
-        }
+        InitializeResources();
 
         _craftWidgetCanvas.SetActive(false);
 
@@ -190,8 +185,20 @@ public class CraftStation : ATransportableElement
         _craftWidget.Configure(GetCurrentBlueprint(), _resources);
     }
 
+    static private void InitializeResources()
+    {
+        if (_resources == null)
+        {
+            _resources = new Dictionary<Resources, int>();
+            _resources.Add(Resources.Ice, initialResources);
+            _resources.Add(Resources.Wood, initialResources);
+        }
+    }
+
     static public void AddRessources(Ingredient resource)
     {
+        InitializeResources();
+
         _resources[resource.Display.Resource] += resource.Quantity;
     }
 }

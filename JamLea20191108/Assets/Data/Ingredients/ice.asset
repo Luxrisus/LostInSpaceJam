@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: ice
-  m_EditorClassIdentifier: Assembly-CSharp::IngredientDisplay
+  m_Script: {fileID: 11500000, guid: 96915f07fe9ef574ebbe267aa43b2943, type: 3}
+  m_Name: Ice
+  m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 2964f01b0397a6f42aef44a576c1312e, type: 3}
   Resource: 0

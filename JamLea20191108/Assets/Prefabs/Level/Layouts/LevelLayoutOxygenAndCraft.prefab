@@ -494,9 +494,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeBeforeBlackHole: 5
-  SideScrollingSpeed: 1
+  SideScrollingSpeed: 0.5
   Blueprints:
   - {fileID: 11400000, guid: e7a9e244eab21db4281f1560928d110f, type: 2}
+  BaseIngredients:
+  - Display: {fileID: 0}
+    Quantity: 2
 --- !u!1 &7903043450319520623
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +631,7 @@ PrefabInstance:
     - target: {fileID: 9105665099307313779, guid: a4c5637ef9c0f174a825cc4dd06de61a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.46
+      value: -2.07
       objectReference: {fileID: 0}
     - target: {fileID: 9105665099307313779, guid: a4c5637ef9c0f174a825cc4dd06de61a,
         type: 3}
@@ -703,7 +706,7 @@ PrefabInstance:
     - target: {fileID: 8844067796271376137, guid: 62ec0b39f2adb2f4798074c5353320cc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.77
+      value: -2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8844067796271376137, guid: 62ec0b39f2adb2f4798074c5353320cc,
         type: 3}
@@ -1079,12 +1082,12 @@ PrefabInstance:
     - target: {fileID: 8101301488993934166, guid: 46babb32305047c489989d41da96590e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 96.16
+      value: 80.06
       objectReference: {fileID: 0}
     - target: {fileID: 8101301488993934166, guid: 46babb32305047c489989d41da96590e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 3.24
       objectReference: {fileID: 0}
     - target: {fileID: 8101301488993934166, guid: 46babb32305047c489989d41da96590e,
         type: 3}
