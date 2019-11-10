@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 3207929785923224228}
   - component: {fileID: 4067668360025087693}
   - component: {fileID: 7328401125314365326}
+  - component: {fileID: 6768725592113555102}
   m_Layer: 0
   m_Name: CraftStation
   m_TagString: Untagged
@@ -173,3 +174,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6768725592113555102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339918407693672247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7705e0fd22fc40446a073b3907757b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentElementInPossession: {fileID: 0}
+  OnObjectTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  OnObjectReleased:
+    m_PersistentCalls:
+      m_Calls: []

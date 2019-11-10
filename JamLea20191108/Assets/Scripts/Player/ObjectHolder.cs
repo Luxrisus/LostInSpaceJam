@@ -10,7 +10,6 @@ public class OnObjectMovedEvent : UnityEvent<ATransportableElement>
 
 public class ObjectHolder : MonoBehaviour
 {
-    [SerializeField]
     private ATransportableElement _currentElementInPossession = null;
 
     public OnObjectMovedEvent OnObjectTaken = new OnObjectMovedEvent();
