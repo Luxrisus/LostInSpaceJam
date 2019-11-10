@@ -11,7 +11,7 @@ public class ManagersManager : Singleton<ManagersManager>
 
     private void Awake()
     {
-        foreach(var manager in _managers)
+        foreach (var manager in _managers)
         {
             AManager instance = Instantiate(manager, transform);
             _managerDict.Add(instance.GetType(), instance);
