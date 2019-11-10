@@ -15,4 +15,13 @@ public class Blackhole: MonoBehaviour
     {
         
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.GetComponent<Plant>() != null)
+        {
+            ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
+            Destroy(collision.gameObject);
+        }
+    }
 }
