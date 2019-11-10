@@ -5,7 +5,7 @@ using UnityEngine;
 public class CraftStation : ATransportableElement
 {
     [SerializeField]
-    private int initialResources = 2;
+    private int initialResources = 0;
     [SerializeField]
     private GameObject _craftWidgetCanvas = null;
     [SerializeField]
@@ -188,5 +188,10 @@ public class CraftStation : ATransportableElement
     {
         _craftWidget.Clear();
         _craftWidget.Configure(GetCurrentBlueprint(), _resources);
+    }
+
+    static public void AddRessources(Ingredient resource)
+    {
+        _resources[resource.Display.Resource] += resource.Quantity;
     }
 }

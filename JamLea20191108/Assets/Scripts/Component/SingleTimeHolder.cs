@@ -6,14 +6,15 @@ public class SingleTimeHolder : ATransportableElement
 {
     public GameObject _objectToInstantiate;
 
-    void Start()
+    protected override void Awake()
     {
-        
+        base.Awake();
     }
 
     public override void Release()
     {
-        Instantiate(_objectToInstantiate, transform.position, transform.rotation);
+        GameObject objectInstantiated = Instantiate(_objectToInstantiate, transform.position, transform.rotation);
+        objectInstantiated.transform.SetParent(_levelLayout);
         Destroy(gameObject);
     }
 }

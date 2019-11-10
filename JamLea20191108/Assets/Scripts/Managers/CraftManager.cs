@@ -12,7 +12,14 @@ public class CraftManager : AManager
 
     public override void Initialize()
     {
+        var levelLayout = FindObjectOfType<LevelLayoutHook>();
 
+        _blueprints = levelLayout.Blueprints;
+
+        foreach(var ingredient in levelLayout.BaseIngredients)
+        {
+            CraftStation.AddRessources(ingredient);
+        }
     }
 
     public List<Blueprint> GetBlueprints()

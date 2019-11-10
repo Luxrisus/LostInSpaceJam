@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ATransportableElement : MonoBehaviour, IInteractable
 {
-    static Transform _levelLayout;
+    static protected Transform _levelLayout;
     ObjectHolder _holder = null;
     Rigidbody2D _rigidBody = null;
 

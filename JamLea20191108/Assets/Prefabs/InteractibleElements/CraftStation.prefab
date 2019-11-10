@@ -868,6 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d030f95a15ae649bd66705117bfbef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialResources: 0
   _craftWidgetCanvas: {fileID: 5007873249558794748}
   _craftWidget: {fileID: 5007873250443711329}
   _craftBarWidget: {fileID: 256434734577985000}
