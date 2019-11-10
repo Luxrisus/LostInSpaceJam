@@ -140,7 +140,6 @@ public class Player : MonoBehaviour, ILinkable
     {
         _linker = linker;
         _oxygenComponent.Plugged = true;
-        Debug.Log("Houston, this is Jacky ! I peux respirer now. Ovaire !");
     }
 
     public void Unlink()

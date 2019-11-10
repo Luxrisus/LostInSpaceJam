@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Plant : ATransportableElement, IInteractable, ILinkable
 {
+    [SerializeField]
+    private PlantOxygenHud _oxygenHud = null;
+
     private Linker _linker = null;
     private OxygenComponent _oxygenComponent = null;
 
@@ -12,7 +15,18 @@ public class Plant : ATransportableElement, IInteractable, ILinkable
         _oxygenComponent = GetComponent<OxygenComponent>();
     }
 
-#region IInteractable
+    private void Update()
+    {
+        if (_oxygenComponent.OxygenLevel <= 0)
+        {
+            ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
+            Destroy(gameObject);
+        }
+
+        _oxygenHud.OxygenIndicator.fillAmount = (float)_oxygenComponent.OxygenLevel / (float)_oxygenComponent.OxygenMax;
+    }
+
+    #region IInteractable
     public void DoInteraction(Player player)
     {
         ObjectHolder holder = player.GetComponent<ObjectHolder>();
@@ -27,7 +41,7 @@ public class Plant : ATransportableElement, IInteractable, ILinkable
         return true;
     }
 #endregion
-    
+
     public void OnUnlink(Linker owner)
     {
         _linker = null;
