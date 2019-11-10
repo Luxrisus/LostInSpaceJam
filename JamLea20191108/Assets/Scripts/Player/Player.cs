@@ -19,7 +19,6 @@ public class Player : MonoBehaviour, ILinkable
 
     private List<GameObject> _interactablesElement = new List<GameObject>();
     private SpriteRenderer _spriteRenderer;
-    private ATransportableElement _currentElementInPossession = null;
     private PlayerHud _playerHud;
 
 #endregion

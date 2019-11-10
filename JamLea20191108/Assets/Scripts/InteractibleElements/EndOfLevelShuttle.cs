@@ -4,30 +4,29 @@ using UnityEngine;
 
 public class EndOfLevelShuttle : MonoBehaviour, IInteractable
 {
-    public void DoInteraction(Player player)
-    {
-        Debug.Log("Test");
-        
-        ATransportableElement currentElement = null;
-        ObjectHolder holder = player.GetComponent<ObjectHolder>();
-        if (holder != null)
-        {
-            currentElement = holder.GetCurrentTransportableElement();
-        }
+    ObjectHolder _holder = null;
 
-        Plant plant = (Plant)currentElement;
-        if (plant != null)
-        {
-            holder.RemoveTransportableElement();
-            PutPlant(plant);
-        }
+    void Start()
+    {
+        _holder = GetComponent<ObjectHolder>();
+        _holder.OnObjectTaken.AddListener(PutPlant);
     }
 
-    public void PutPlant(Plant plant)
+    public void DoInteraction(Player player)
     {
-        ManagersManager.Instance.Get<LevelManager>().EndOfLevel(true);
-        // TODO @Salanyel: Trigger the end of the current game
-        Debug.Log("Plant passed!");
+        // We need ti implement interactable to allo the player to interact with us
+        // we should rework this
+    }
+
+    public void PutPlant(ATransportableElement element)
+    {
+        Plant plant = (Plant)element;
+        if (plant != null)
+        {
+            ManagersManager.Instance.Get<LevelManager>().EndOfLevel(true);
+            // TODO @Salanyel: Trigger the end of the current game
+            Debug.Log("Plant passed!");
+        }
     }
 
     public bool CanInteract()

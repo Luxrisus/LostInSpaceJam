@@ -14,8 +14,6 @@ public class Linker : MonoBehaviour, IInteractable
 
     float _distanceTotal = 0f;
 
-    private ObjectHolder _objectHolder;
-
     public class LinkData
     {
         public Linker LinkStart;
@@ -39,7 +37,7 @@ public class Linker : MonoBehaviour, IInteractable
 
     void Start()
     {
-        _objectHolder = GetComponent<ObjectHolder>();
+
     }
 
     void FixedUpdate()

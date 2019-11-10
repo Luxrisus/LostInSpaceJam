@@ -1,11 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class OnObjectMovedEvent : UnityEvent<ATransportableElement>
+{
+}
 
 public class ObjectHolder : MonoBehaviour
 {
     [SerializeField]
     private ATransportableElement _currentElementInPossession = null;
+
+    public OnObjectMovedEvent OnObjectTaken = new OnObjectMovedEvent();
+    public OnObjectMovedEvent OnObjectReleased = new OnObjectMovedEvent();
 
     public void Take(ATransportableElement element)
     {
@@ -22,6 +31,7 @@ public class ObjectHolder : MonoBehaviour
                 linker.AddLink(linkable);
             }
         }
+        OnObjectTaken.Invoke(element);
     }
 
     public ATransportableElement GetCurrentTransportableElement()
@@ -42,6 +52,7 @@ public class ObjectHolder : MonoBehaviour
             }
         }
         
+        OnObjectReleased.Invoke(_currentElementInPossession);
         _currentElementInPossession.Release();
         _currentElementInPossession = null;
     }
@@ -57,4 +68,6 @@ public class ObjectHolder : MonoBehaviour
     {
         return _currentElementInPossession != null;
     }
+
+
 }
