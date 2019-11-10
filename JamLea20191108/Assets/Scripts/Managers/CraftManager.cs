@@ -12,7 +12,7 @@ public class CraftManager : AManager
 
     public override void Initialize()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public List<Blueprint> GetBlueprints()

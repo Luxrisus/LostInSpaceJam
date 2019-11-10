@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4789925270702719246
+--- !u!1 &8807540515230480677
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4789925270702719244}
-  - component: {fileID: 4789925270702719247}
+  - component: {fileID: 8807540515230480679}
+  - component: {fileID: 8807540515230480676}
   m_Layer: 0
-  m_Name: Managers
+  m_Name: PlayerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4789925270702719244
+--- !u!4 &8807540515230480679
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4789925270702719246}
+  m_GameObject: {fileID: 8807540515230480677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,21 +31,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4789925270702719247
+--- !u!114 &8807540515230480676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4789925270702719246}
+  m_GameObject: {fileID: 8807540515230480677}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbcbbe1c197df2e4db02a0a8b2b2c811, type: 3}
+  m_Script: {fileID: 11500000, guid: b663f283ccf3f014abb0fa93f8172fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _managers:
-  - {fileID: 4214677846305548964, guid: 2d4373441cdbdaf489b5d30abb4ffd9c, type: 3}
-  - {fileID: 5908844637568406303, guid: 1e4873173318a604ea8ae5b9a727702e, type: 3}
-  - {fileID: 7668788066492948225, guid: f841b9140675f5b44a58b9268c966168, type: 3}
-  - {fileID: 4261358560576201771, guid: 35bb053c0733e8444b85a5e73ad4a892, type: 3}
-  - {fileID: 8807540515230480676, guid: c2ddd77a945ccc04f85c0e5d7c833361, type: 3}
+  _playerColors:
+  - {r: 0.36779106, g: 0.38489264, b: 0.8962264, a: 1}
+  - {r: 0.18903525, g: 0.6792453, b: 0.20293626, a: 1}
+  - {r: 0.87190187, g: 0.9433962, b: 0.3693485, a: 1}
+  - {r: 0.8867924, g: 0.28025985, b: 0.28025985, a: 1}
+  - {r: 0.80126864, g: 0.3250267, b: 0.8301887, a: 1}
+  _players: []

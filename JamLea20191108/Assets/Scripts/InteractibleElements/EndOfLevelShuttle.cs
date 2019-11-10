@@ -11,6 +11,7 @@ public class EndOfLevelShuttle : MonoBehaviour, IInteractable
         Plant plant = (Plant)currentElement;
         if (currentElement != null && plant != null)
         {
+            player.RemoveTransportableElement();
             PutPlant(plant);
         }
     }

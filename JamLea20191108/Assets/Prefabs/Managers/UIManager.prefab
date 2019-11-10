@@ -43,5 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bca81dc2256d14990ea9dfa71235f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   DefeatGameScreenPrefab: {fileID: 7564651732992441759, guid: 2e320eef570146741bbc4b5ce04c2504,
+=======
+  _playersPanelPrefab: {fileID: 3227862100706323475, guid: 4008781eab25e264282d90204481acf4,
+    type: 3}
+  PlayersPanel: {fileID: 3227862100706323475, guid: 4008781eab25e264282d90204481acf4,
+>>>>>>> Adding player's oxygen gauge UI and update
     type: 3}

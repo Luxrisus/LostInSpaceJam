@@ -13,21 +13,38 @@ public class Player : MonoBehaviour, ILinkable
     [SerializeField]
     private float _interactionDistance = 1f;
 
-    private Vector3 _direction = Vector3.zero;
-    private Linker _linker = null;
-
-    private ATransportableElement _currentElementInPossession = null;
-
     [SerializeField]
     private OxygenComponent _oxygenComponent = null;
 
+<<<<<<< HEAD
     private List<GameObject> _interactablesElement = new List<GameObject>();
+=======
+    private Vector3 _direction = Vector3.zero;
+    private Linker _linker = null;
+    private SpriteRenderer _spriteRenderer;
+    private ATransportableElement _currentElementInPossession = null;
+    private PlayerHud _playerHud;
+    private List<IInteractable> _interactablesElement = new List<IInteractable>();
+>>>>>>> Adding player's oxygen gauge UI and update
 
 #endregion
+
+    void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        ManagersManager.Instance.Get<PlayerManager>().PlayerJoined(this);
+    }
 
     void Start()
     {
         Assert.IsNotNull(_oxygenComponent);
+    }
+
+    void Update()
+    {
+        float ratio = (float)_oxygenComponent.OxygenLevel / (float)_oxygenComponent.OxygenMax;
+        Debug.Log($"Ratio: {ratio}");
+        _playerHud?.SetFillRatio(ratio);
     }
 
     void FixedUpdate()
@@ -114,7 +131,7 @@ public class Player : MonoBehaviour, ILinkable
         _oxygenComponent.Plugged = true;
         Debug.Log("Houston, this is Jacky ! I peux respirer now. Ovaire !");
     }
-    
+
     public void Unlink()
     {
         if (IsLinked())
@@ -133,7 +150,14 @@ public class Player : MonoBehaviour, ILinkable
     {
         Unlink();
         Debug.Log("Houston ! I got un problème with the respiration ! AAraaarraAAaaaargh...");
+        ManagersManager.Instance.Get<PlayerManager>().PlayerDied(this);
+        ManagersManager.Instance.Get<UIManager>().PlayersPanel.PlayerDied(_playerHud);
         Destroy(gameObject);
+    }
+
+    public void AddPlayerHud(PlayerHud hud)
+    {
+        _playerHud = hud;
     }
 
     public Vector3 GetPosition()
@@ -141,6 +165,7 @@ public class Player : MonoBehaviour, ILinkable
         return transform.position;
     }
 
+    #region Interaction
     public bool IsInteracting()
     {
         return GetCurrentTransportableElement() != null;
@@ -162,7 +187,9 @@ public class Player : MonoBehaviour, ILinkable
         _currentElementInPossession.Release();
         _currentElementInPossession = null;
     }
+    #endregion
 
+#region Collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IInteractable newInteractable = collision.gameObject.GetComponent<IInteractable>();
@@ -180,5 +207,12 @@ public class Player : MonoBehaviour, ILinkable
             _interactablesElement.Remove(collision.gameObject);
         }
     }
+#endregion
+
+    public void SetColor(Color color)
+    {
+        _spriteRenderer.color = color;
+    }
+
 }
 
