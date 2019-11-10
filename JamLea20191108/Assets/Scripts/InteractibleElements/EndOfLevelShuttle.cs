@@ -25,6 +25,7 @@ public class EndOfLevelShuttle : MonoBehaviour, IInteractable
 
     public void PutPlant(Plant plant)
     {
+        ManagersManager.Instance.Get<LevelManager>().EndOfLevel(true);
         // TODO @Salanyel: Trigger the end of the current game
         Debug.Log("Plant passed!");
     }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class UIManager : AManager
 {
+    public GameObject WinGameScreenPrefab;
+    private GameObject WinGameScreen;
+
     public GameObject DefeatGameScreenPrefab;
     private GameObject DefeatGameScreen;
 
@@ -25,6 +28,13 @@ public class UIManager : AManager
 
     public void DisplayEndOfLevelScreen(bool isWin)
     {
-        DefeatGameScreen = Instantiate(DefeatGameScreenPrefab);
+        if(isWin == true)
+        {
+            WinGameScreen = Instantiate(WinGameScreenPrefab);
+        }
+        else
+        {
+            DefeatGameScreen = Instantiate(DefeatGameScreenPrefab);
+        }
     }
 }
