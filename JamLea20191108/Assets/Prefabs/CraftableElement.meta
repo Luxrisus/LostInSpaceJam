@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:JamLea20191108/Assets/Data.meta
-guid: 86e798b939d387e4dbd5ccbccc43f319
-=======
-guid: 345f7d82ef466824db51adf084a08163
->>>>>>> craftable elements:JamLea20191108/Assets/Prefabs/CraftableElement.meta
+guid: 56571af26b89f34489d56fc3b016e518
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

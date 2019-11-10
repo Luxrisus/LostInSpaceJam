@@ -6,12 +6,14 @@ public class CraftableComponent : ATransportableElement
     {
 
     [SerializeField]
-    private IngredientDisplay _ingredientDisplay;
+    private IngredientDisplay _ingredientDisplay = null;
     [SerializeField]
-    private SpriteRenderer _sprite;
+    private SpriteRenderer _sprite = null;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         this._sprite.sprite = _ingredientDisplay.Sprite;
     }
 }

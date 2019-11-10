@@ -62,7 +62,7 @@ public class CraftStation : ATransportableElement, IInteractable
             }
         }
     }
-    
+
     public void StopCraft(Player player)
     {
         if (player == _craftingPlayer && _craftCor != null)
@@ -117,6 +117,7 @@ public class CraftStation : ATransportableElement, IInteractable
         return _blueprints[_currentBlueprintIndex];
     }
 
+    #region collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<Player>() != null)
@@ -144,5 +145,34 @@ public class CraftStation : ATransportableElement, IInteractable
                 _craftWidgetCanvas.SetActive(false);
             }
         }
+    }
+    #endregion
+
+    private void DisplayBlueprint()
+    {
+        _craftWidget.Clear();
+        _craftWidget.Configure(GetCurrentBlueprint(), _resources);
+    }
+
+    public void DisplayNextBlueprint()
+    {
+        if (_blueprints.Count < 2)
+        {
+            return;
+        }
+
+        _currentBlueprintIndex = _currentBlueprintIndex == _blueprints.Count - 1 ? 0 : _currentBlueprintIndex + 1;
+        DisplayBlueprint();
+    }
+
+    public void DisplayPreviousBlueprint()
+    {
+        if (_blueprints.Count < 2)
+        {
+            return;
+        }
+
+        _currentBlueprintIndex = _currentBlueprintIndex == 0 ? _blueprints.Count - 1 : _currentBlueprintIndex - 1;
+        DisplayBlueprint();
     }
 }
