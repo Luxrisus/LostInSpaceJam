@@ -22,6 +22,8 @@ public class Player : MonoBehaviour, ILinkable
     private OxygenComponent _oxygenComponent = null;
 
     private List<GameObject> _interactablesElement = new List<GameObject>();
+    private IInteractable _currentInteraction = null;
+
 #endregion
 
     void Start()
@@ -43,12 +45,15 @@ public class Player : MonoBehaviour, ILinkable
             Die();
     }
 
+#region Input Management
+
     public void OnMove(InputValue value)
     {
         Vector2 move = value.Get<Vector2>();
         _direction = new Vector3(move.x, move.y, 0f);
     }
 
+    // Only interact with Linker
     public void OnLinkAction(InputValue value)
     {
         if (_linker != null)
@@ -60,7 +65,7 @@ public class Player : MonoBehaviour, ILinkable
             foreach (GameObject element in _interactablesElement)
             {
                 Linker linker = element.GetComponent<Linker>();
-                if (linker != null)
+                if (linker != null && linker.CanInteract())
                 {
                     linker.DoInteraction(this);
                 }
@@ -68,10 +73,29 @@ public class Player : MonoBehaviour, ILinkable
         }
     }
 
+    // Interact with every IInteractable except Linker
     public void OnMainAction(InputValue value)
     {
-        Debug.Log("Main action !");
+        if (_currentInteraction != null)
+        {
+            _currentInteraction.DoInteraction(this);
+        }
+        else
+        {
+            foreach (GameObject element in _interactablesElement)
+            {
+                IInteractable interactable = element.GetComponent<IInteractable>();
+                Linker linker = element.GetComponent<Linker>();
+                if (_currentInteraction == null && interactable != null && interactable.CanInteract() && linker == null)
+                {
+                    _currentInteraction = interactable;
+                    interactable.DoInteraction(this);
+                }
+            }
+        }
     }
+
+#endregion
 
 #region Linking Logic
 
@@ -110,13 +134,20 @@ public class Player : MonoBehaviour, ILinkable
         Debug.Log("Houston ! I got un problème with the respiration ! AAraaarraAAaaaargh...");
         Destroy(gameObject);
     }
+
     public Vector3 GetPosition()
     {
         return transform.position;
     }
 
+    public bool IsInteracting()
+    {
+        return GetCurrentTransportableElement() != null;
+    }
+
     public void Take(ATransportableElement element)
     {
+        element.Take(transform);
         _currentElementInPossession = element;
     }
 
@@ -127,6 +158,7 @@ public class Player : MonoBehaviour, ILinkable
 
     public void RemoveTransportableElement()
     {
+        _currentElementInPossession.Release();
         _currentElementInPossession = null;
     }
 

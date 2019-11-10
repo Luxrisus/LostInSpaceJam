@@ -114,18 +114,19 @@ public class Linker : MonoBehaviour, IInteractable
 #region IInteractable
     public void DoInteraction(Player player)
     {
-        ILinkable linkable = player.GetComponent<ILinkable>();
-        if (linkable != null)
+        if (IsLinked(player))
         {
-            if (IsLinked(player))
-            {
-                RemoveLink(linkable);
-            }
-            else
-            {
-                AddLink(linkable);
-            }
+            RemoveLink(player);
         }
+        else
+        {
+            AddLink(player);
+        }
+    }
+
+    public bool CanInteract()
+    {
+        return _links.Count < _maxLink;
     }
 #endregion
 }

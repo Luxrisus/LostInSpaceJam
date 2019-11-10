@@ -20,4 +20,9 @@ public class EndOfLevelShuttle : MonoBehaviour, IInteractable
         // TODO @Salanyel: Trigger the end of the current game
         Debug.Log("Plant passed!");
     }
+
+    public bool CanInteract()
+    {
+        return true;
+    }
 }
