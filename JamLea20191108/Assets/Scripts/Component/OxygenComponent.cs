@@ -68,6 +68,8 @@ public class OxygenComponent : MonoBehaviour
                     depletion = DepletionRatePerSecond;
                 }
 
+                _lastPosition = transform.localPosition;
+
                 depletion *= Time.deltaTime;
                 _oxygen -= depletion;
                 if (_oxygen <= 0.0f)
