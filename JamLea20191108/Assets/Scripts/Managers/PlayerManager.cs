@@ -47,6 +47,7 @@ public class PlayerManager : AManager
         player.SetColor(color);
         var playerHud = ManagersManager.Instance.Get<UIManager>().PlayersPanel.AddPlayerHud(color);
         player.AddPlayerHud(playerHud);
+        player.transform.SetParent(FindObjectOfType<LevelLayoutHook>().transform);
     }
 
     public void PlayerDied(Player player)
