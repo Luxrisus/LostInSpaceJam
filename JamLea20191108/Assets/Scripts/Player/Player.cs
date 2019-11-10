@@ -22,7 +22,6 @@ public class Player : MonoBehaviour, ILinkable
     private OxygenComponent _oxygenComponent = null;
 
     private List<GameObject> _interactablesElement = new List<GameObject>();
-    private IInteractable _currentInteraction = null;
 
 #endregion
 
@@ -42,7 +41,9 @@ public class Player : MonoBehaviour, ILinkable
         transform.Translate(translation);
 
         if (_oxygenComponent.OxygenLevel == 0)
+        {
             Die();
+        }
     }
 
 #region Input Management
@@ -76,9 +77,10 @@ public class Player : MonoBehaviour, ILinkable
     // Interact with every IInteractable except Linker
     public void OnMainAction(InputValue value)
     {
-        if (_currentInteraction != null)
+        // Can't do interaction if the player carry something
+        if (_currentElementInPossession != null)
         {
-            _currentInteraction.DoInteraction(this);
+            RemoveTransportableElement();
         }
         else
         {
@@ -86,9 +88,8 @@ public class Player : MonoBehaviour, ILinkable
             {
                 IInteractable interactable = element.GetComponent<IInteractable>();
                 Linker linker = element.GetComponent<Linker>();
-                if (_currentInteraction == null && interactable != null && interactable.CanInteract() && linker == null)
+                if (_currentElementInPossession == null && interactable != null && interactable.CanInteract() && linker == null)
                 {
-                    _currentInteraction = interactable;
                     interactable.DoInteraction(this);
                 }
             }

@@ -7,15 +7,7 @@ public class Plant : ATransportableElement, IInteractable
 #region IInteractable
     public void DoInteraction(Player player)
     {
-        Debug.Log("interaction plant");
-        if (player.GetCurrentTransportableElement() == this)
-        {
-            player.RemoveTransportableElement();
-        }
-        else
-        {
-            player.Take(this);
-        }
+        player.Take(this);
     }
 
     public bool CanInteract()
