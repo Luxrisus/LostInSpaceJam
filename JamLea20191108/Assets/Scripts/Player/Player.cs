@@ -16,16 +16,12 @@ public class Player : MonoBehaviour, ILinkable
     [SerializeField]
     private OxygenComponent _oxygenComponent = null;
 
-<<<<<<< HEAD
     private List<GameObject> _interactablesElement = new List<GameObject>();
-=======
     private Vector3 _direction = Vector3.zero;
     private Linker _linker = null;
     private SpriteRenderer _spriteRenderer;
     private ATransportableElement _currentElementInPossession = null;
     private PlayerHud _playerHud;
-    private List<IInteractable> _interactablesElement = new List<IInteractable>();
->>>>>>> Adding player's oxygen gauge UI and update
 
 #endregion
 
@@ -43,7 +39,6 @@ public class Player : MonoBehaviour, ILinkable
     void Update()
     {
         float ratio = (float)_oxygenComponent.OxygenLevel / (float)_oxygenComponent.OxygenMax;
-        Debug.Log($"Ratio: {ratio}");
         _playerHud?.SetFillRatio(ratio);
     }
 
