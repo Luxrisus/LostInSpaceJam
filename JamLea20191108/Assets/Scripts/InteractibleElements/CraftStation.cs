@@ -46,6 +46,22 @@ public class CraftStation : ATransportableElement, IInteractable
         }
     }
 
+    public void StartCraft(Player player)
+    {
+        Debug.Log("Start craft");
+        // Give the object to the player
+
+        // Start coroutine for the selected object
+        // Prevent a startCraft if the craft has already started
+    }
+    
+    public void StopCraft(Player player)
+    {
+        Debug.Log("Stop craft");
+        // Stop only if it's done by the same player
+        // Start
+    }
+
     void OnObjectTaken(ATransportableElement element)
     {
         Plant plant = (Plant)element;

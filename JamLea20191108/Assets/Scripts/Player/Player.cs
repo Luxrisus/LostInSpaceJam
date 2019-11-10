@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, ILinkable
     private List<GameObject> _interactablesElement = new List<GameObject>();
     private SpriteRenderer _spriteRenderer;
     private PlayerHud _playerHud;
-    public bool _isMainActionPressed = false;
+    private CraftStation _craftStation = null;
 
 #endregion
 
@@ -141,8 +141,17 @@ public class Player : MonoBehaviour, ILinkable
 
     public void OnMainAction(InputValue value)
     {
-        _isMainActionPressed = value.isPressed;
-
+        if (_craftStation != null)
+        {
+            if (value.isPressed)
+            {
+                _craftStation.StartCraft(this);
+            }
+            else
+            {
+                _craftStation.StopCraft(this);
+            }
+        }
     }
     
     public void OnChangeIngredientLeft(InputValue value)
@@ -220,6 +229,12 @@ public class Player : MonoBehaviour, ILinkable
         {
             _interactablesElement.Add(collision.gameObject);
         }
+
+        CraftStation craftStation = collision.gameObject.GetComponent<CraftStation>();
+        if (craftStation != null)
+        {
+            _craftStation = craftStation;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -228,6 +243,13 @@ public class Player : MonoBehaviour, ILinkable
         if (newInteractable != null)
         {
             _interactablesElement.Remove(collision.gameObject);
+        }
+        
+        CraftStation craftStation = collision.gameObject.GetComponent<CraftStation>();
+        if (_craftStation == craftStation)
+        {
+            // abort craft ?
+            _craftStation = null;
         }
     }
 #endregion
