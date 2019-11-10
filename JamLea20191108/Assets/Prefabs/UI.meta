@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: d364b3f8d2950bb41a6589b0c578cbe1
+=======
+guid: 454cc07e618f78d479969769419fa8a9
+>>>>>>> Adding player's oxygen gauge UI and update
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -15,20 +15,36 @@ public class Player : MonoBehaviour, ILinkable
 
     private Vector3 _direction = Vector3.zero;
     private Linker _linker = null;
-
     private ObjectHolder _objectHolder;
 
     [SerializeField]
     private OxygenComponent _oxygenComponent = null;
 
     private List<GameObject> _interactablesElement = new List<GameObject>();
+    private Vector3 _direction = Vector3.zero;
+    private Linker _linker = null;
+    private SpriteRenderer _spriteRenderer;
+    private ATransportableElement _currentElementInPossession = null;
+    private PlayerHud _playerHud;
 
 #endregion
+
+    void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        ManagersManager.Instance.Get<PlayerManager>().PlayerJoined(this);
+    }
 
     void Start()
     {
         Assert.IsNotNull(_oxygenComponent);
         _objectHolder = GetComponent<ObjectHolder>();
+    }
+
+    void Update()
+    {
+        float ratio = (float)_oxygenComponent.OxygenLevel / (float)_oxygenComponent.OxygenMax;
+        _playerHud?.SetFillRatio(ratio);
     }
 
     void FixedUpdate()
@@ -132,7 +148,7 @@ public class Player : MonoBehaviour, ILinkable
         _oxygenComponent.Plugged = true;
         Debug.Log("Houston, this is Jacky ! I peux respirer now. Ovaire !");
     }
-    
+
     public void Unlink()
     {
         if (IsLinked())
@@ -151,7 +167,14 @@ public class Player : MonoBehaviour, ILinkable
     {
         Unlink();
         Debug.Log("Houston ! I got un problème with the respiration ! AAraaarraAAaaaargh...");
+        ManagersManager.Instance.Get<PlayerManager>().PlayerDied(this);
+        ManagersManager.Instance.Get<UIManager>().PlayersPanel.PlayerDied(_playerHud);
         Destroy(gameObject);
+    }
+
+    public void AddPlayerHud(PlayerHud hud)
+    {
+        _playerHud = hud;
     }
 
     public Vector3 GetPosition()
@@ -159,6 +182,7 @@ public class Player : MonoBehaviour, ILinkable
         return transform.position;
     }
 
+#region Collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IInteractable newInteractable = collision.gameObject.GetComponent<IInteractable>();
@@ -176,5 +200,12 @@ public class Player : MonoBehaviour, ILinkable
             _interactablesElement.Remove(collision.gameObject);
         }
     }
+#endregion
+
+    public void SetColor(Color color)
+    {
+        _spriteRenderer.color = color;
+    }
+
 }
 

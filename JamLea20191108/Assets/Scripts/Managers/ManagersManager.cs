@@ -16,8 +16,10 @@ public class ManagersManager : Singleton<ManagersManager>
         foreach(var manager in _managers)
         {
             AManager instance = Instantiate(manager, transform);
+            _managerDict.Add(instance.GetType(), instance);
+
             instance.name = manager.GetType().ToString();
-            _managerDict.Add(manager.GetType(), manager);
+            instance.Initialize();
         }
     }
 
