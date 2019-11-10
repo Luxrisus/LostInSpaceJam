@@ -22,9 +22,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MainAction",
+                    "name": "HoldAction",
                     "type": "Button",
                     "id": "8074a078-3614-4dfd-99fa-e5fb937f0879",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MainAction",
+                    "type": "Button",
+                    "id": "8a745fae-46b0-418e-bbd5-f5ee5516e30b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -192,7 +200,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "MainAction",
+                    "action": "HoldAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -203,6 +211,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
+                    "action": "HoldAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1f4a46a-86d9-40cf-9cf2-9c9bd1a2c4b2",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "MainAction",
                     "isComposite": false,
                     "isPartOfComposite": false

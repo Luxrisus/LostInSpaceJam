@@ -20,6 +20,7 @@ public class Player : MonoBehaviour, ILinkable
     private List<GameObject> _interactablesElement = new List<GameObject>();
     private SpriteRenderer _spriteRenderer;
     private PlayerHud _playerHud;
+    public bool _isMainActionPressed = false;
 
 #endregion
 
@@ -86,7 +87,7 @@ public class Player : MonoBehaviour, ILinkable
     }
 
     // Interact with every IInteractable except Linker
-    public void OnMainAction(InputValue value)
+    public void OnHoldAction(InputValue value)
     {
         // If the player carry something try to give the object
         if (_objectHolder != null && _objectHolder.HasObject())
@@ -138,6 +139,11 @@ public class Player : MonoBehaviour, ILinkable
         }
     }
 
+    public void OnMainAction(InputValue value)
+    {
+        _isMainActionPressed = value.isPressed;
+
+    }
 #endregion
 
 #region Linking Logic
