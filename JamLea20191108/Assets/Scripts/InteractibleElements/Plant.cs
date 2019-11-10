@@ -6,13 +6,18 @@ public class Plant : ATransportableElement, IInteractable, ILinkable
 {
     [SerializeField]
     private PlantOxygenHud _oxygenHud = null;
+    [SerializeField]
+    private PlantWaterHud _waterHud = null;
 
     private Linker _linker = null;
     private OxygenComponent _oxygenComponent = null;
 
+    private WaterComponent _waterComponent = null;
+
     void Start()
     {
         _oxygenComponent = GetComponent<OxygenComponent>();
+        _waterComponent = GetComponent<WaterComponent>();
     }
 
     private void Update()
@@ -24,6 +29,14 @@ public class Plant : ATransportableElement, IInteractable, ILinkable
         }
 
         _oxygenHud.OxygenIndicator.fillAmount = (float)_oxygenComponent.OxygenLevel / (float)_oxygenComponent.OxygenMax;
+
+        if (_waterComponent.WaterLevel <= 0)
+        {
+            ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
+            Destroy(gameObject);
+        }
+
+        _waterHud.WaterIndicator.fillAmount = (float)_waterComponent.WaterLevel / (float)_waterComponent.WaterMax;
     }
 
     #region IInteractable
