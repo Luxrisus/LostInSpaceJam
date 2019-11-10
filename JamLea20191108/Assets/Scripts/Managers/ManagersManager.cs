@@ -11,8 +11,6 @@ public class ManagersManager : Singleton<ManagersManager>
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-
         foreach(var manager in _managers)
         {
             AManager instance = Instantiate(manager, transform);

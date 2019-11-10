@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum LevelState
 {
@@ -83,7 +84,8 @@ public class LevelManager : AManager
     {
         _levelState = LevelState.EndOfGame;
         _levelScrollingSpeed = 0f;
-        ManagersManager.Instance.Get<UIManager>().DisplayEndOfLevelScreen(isWin);
+        PlayerPrefs.SetInt("isWin", isWin ? 1 : 0);
+        SceneManager.LoadScene("EndScene", LoadSceneMode.Single);
     }
 
     public LevelState getLevelState()

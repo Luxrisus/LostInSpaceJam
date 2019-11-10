@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MaxScene.unity
     guid: f62e7858013d2a346bc704d478708cf8
+  - enabled: 1
+    path: Assets/Scenes/Level01OnlyOxygen.unity
+    guid: c863348667e95014cbae1869097be878
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: 9b163e7d27e504043adbbc8c5d921a48
   m_configObjects: {}

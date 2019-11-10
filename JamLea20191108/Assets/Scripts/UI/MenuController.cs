@@ -24,7 +24,6 @@ public class MenuController : MonoBehaviour
     public void OnNavigate(InputValue value)
     {
         Vector2 direction = value.Get<Vector2>();
-        Debug.Log("value" + direction);
 
         int prevIndex = _index;
         _index -= (int)direction.y;

@@ -870,7 +870,7 @@ PrefabInstance:
     - target: {fileID: 2413905743617927471, guid: 8f28b2938da2bdf4fa0062493923b4e1,
         type: 3}
       propertyPath: _sceneName
-      value: MaxScene
+      value: Level01OnlyOxygen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f28b2938da2bdf4fa0062493923b4e1, type: 3}
