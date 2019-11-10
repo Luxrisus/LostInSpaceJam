@@ -64,5 +64,10 @@ public class PlayerManager : AManager
 
         _players.Remove(player);
         _colorUsed[index] = false;
+
+        if (_players.Count == 0)
+        {
+            ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
+        }
     }
 }
