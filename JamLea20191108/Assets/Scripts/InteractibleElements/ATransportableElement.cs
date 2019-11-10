@@ -18,7 +18,7 @@ public abstract class ATransportableElement : MonoBehaviour
         }
     }
 
-    public void Take(ObjectHolder holder)
+    public virtual void Take(ObjectHolder holder)
     {
         if (_holder != null)
         {
@@ -29,7 +29,7 @@ public abstract class ATransportableElement : MonoBehaviour
         _rigidBody.simulated = false;
     }
 
-    public void Release()
+    public virtual void Release()
     {
         _holder = null;
         this.transform.SetParent(_levelLayout);
