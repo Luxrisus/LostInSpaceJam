@@ -10,9 +10,6 @@ public class Player : MonoBehaviour, ILinkable
     [SerializeField]
     private float _speed = 5f;
 
-    [SerializeField]
-    private float _interactionDistance = 1f;
-
     private Vector3 _direction = Vector3.zero;
     private Linker _linker = null;
     private ObjectHolder _objectHolder;
@@ -104,7 +101,7 @@ public class Player : MonoBehaviour, ILinkable
                     break;
                 }
             }
-            
+
             if (newHolder != null)
             {
                 newHolder.TakeFrom(_objectHolder);

@@ -4,24 +4,24 @@ using UnityEngine;
 public class Linker : MonoBehaviour, IInteractable
 {
     [SerializeField]
-    private Link _linkPrefab;
+    private Link _linkPrefab = null;
 
     [SerializeField]
     int _maxLink = 3;
-    
+
     [SerializeField]
     float _maxDistance = 10f;
 
     float _distanceTotal = 0f;
 
     private ObjectHolder _objectHolder;
-    
+
     public class LinkData
     {
         public Linker LinkStart;
         public ILinkable LinkEnd;
         public Link LinkObject;
-        
+
         public LinkData(Linker linkStart, ILinkable linkEnd, Link linkObject)
         {
             LinkStart = linkStart;
@@ -61,7 +61,7 @@ public class Linker : MonoBehaviour, IInteractable
     {
         return _links.Find(l => (l.LinkEnd == linkable)) != null;
     }
-    
+
     public bool AddLink(ILinkable linkable)
     {
         bool canAddLink = CanAddLink();
@@ -74,12 +74,12 @@ public class Linker : MonoBehaviour, IInteractable
         }
         return canAddLink;
     }
-    
+
     public bool RemoveLink(ILinkable linkable)
     {
         LinkData data = _links.Find(l => (l.LinkEnd == linkable));
         bool linkRemoved = data != null;
-        
+
         if (linkRemoved)
         {
             _links.Remove(data);
@@ -108,7 +108,7 @@ public class Linker : MonoBehaviour, IInteractable
         }
         return translation;
     }
-    
+
     public Vector3 GetPosition()
     {
         return transform.position;

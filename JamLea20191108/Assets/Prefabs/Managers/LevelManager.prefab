@@ -43,4 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd1901770f4d4543afcb37853b277df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBeforeBlackHole: 5
+  _timeBeforeBlackHole: 1
+  _levelScrollingSpeed: 1

@@ -4,24 +4,18 @@ using UnityEngine;
 
 public class Blackhole: MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.GetComponent<Plant>() != null)
         {
             ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
-            Destroy(collision.gameObject);
         }
+
+        if(collision.gameObject.GetComponent<Player>() != null)
+        {
+            collision.gameObject.GetComponent<Player>().Die();
+        }
+
+        Destroy(collision.gameObject);
     }
 }

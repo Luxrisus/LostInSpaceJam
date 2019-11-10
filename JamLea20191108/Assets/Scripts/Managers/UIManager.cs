@@ -11,7 +11,7 @@ public class UIManager : AManager
     private GameObject DefeatGameScreen;
 
     [SerializeField]
-    PlayersPanel _playersPanelPrefab;
+    PlayersPanel _playersPanelPrefab = null;
 
     private PlayersPanel _playersPanel;
 

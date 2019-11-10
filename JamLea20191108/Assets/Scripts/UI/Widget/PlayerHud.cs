@@ -6,10 +6,14 @@ using UnityEngine.UI;
 public class PlayerHud : MonoBehaviour
 {
     [SerializeField]
-    private Image _oxygenBar;
+    private Image _playersElement = null;
+
+    [SerializeField]
+    private Image _oxygenBar = null;
 
     public void SetColor(Color color)
     {
+        _playersElement.color = color;
         _oxygenBar.color = color;
     }
 
