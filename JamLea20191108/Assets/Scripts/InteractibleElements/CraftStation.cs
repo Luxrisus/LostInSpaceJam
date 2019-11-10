@@ -25,7 +25,7 @@ public class CraftStation : ATransportableElement, IInteractable
         {
             _resources = new Dictionary<Resources, int>();
             _resources.Add(Resources.Ice, 0);
-            _resources.Add(Resources.Wood, 2);
+            _resources.Add(Resources.Wood, 0);
         }
 
         _craftWidgetCanvas.SetActive(false);
@@ -89,16 +89,18 @@ public class CraftStation : ATransportableElement, IInteractable
 
     void OnObjectTaken(ATransportableElement element)
     {
-        Plant plant = (Plant)element;
-
-        if (plant)
+        if (element.GetType() == typeof(Plant))
         {
             // We can't put the plant in the craft station
             GetComponent<ObjectHolder>().RemoveTransportableElement();
         }
-        else
+        else if (element.GetType() == typeof(CraftableComponent))
         {
-            // Delete the gameobject and store it for the craft
+            var craftableComponent = (CraftableComponent)(element);
+
+            _resources[craftableComponent.GetResource()]++;
+            Destroy(element.gameObject);
+            DisplayBlueprint();
         }
     }
 

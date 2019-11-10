@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da7e261fee62bd44a24d3682eeb37d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DepletionRatePerSecond: 1
+  DepletionRatePerSecond: 0
   RefillRatePerSecond: 10
   OxygenMovementDepletionFactor: 2
   Plugged: 0
@@ -225,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7705e0fd22fc40446a073b3907757b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentElementInPossession: {fileID: 0}
   OnObjectTaken:
     m_PersistentCalls:
       m_Calls: []

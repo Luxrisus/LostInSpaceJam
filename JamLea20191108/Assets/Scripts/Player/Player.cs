@@ -153,12 +153,12 @@ public class Player : MonoBehaviour, ILinkable
             }
         }
     }
-    
+
     public void OnSelectNextBlueprint(InputValue value)
     {
         _craftStation?.NextBlueprint();
     }
-    
+
     public void OnSelectPrevBlueprint(InputValue value)
     {
         _craftStation?.PrevBlueprint();
@@ -244,7 +244,7 @@ public class Player : MonoBehaviour, ILinkable
         {
             _interactablesElement.Remove(collision.gameObject);
         }
-        
+
         CraftStation craftStation = collision.gameObject.GetComponent<CraftStation>();
         if (_craftStation == craftStation)
         {
