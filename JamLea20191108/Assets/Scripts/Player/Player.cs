@@ -19,7 +19,6 @@ public class Player : MonoBehaviour, ILinkable
 
     private List<GameObject> _interactablesElement = new List<GameObject>();
     private SpriteRenderer _spriteRenderer;
-    private ATransportableElement _currentElementInPossession = null;
     private PlayerHud _playerHud;
 
 #endregion
@@ -161,7 +160,7 @@ public class Player : MonoBehaviour, ILinkable
     public void Die()
     {
         Unlink();
-        Debug.Log("Houston ! I got un problème with the respiration ! AAraaarraAAaaaargh...");
+        _objectHolder?.RemoveTransportableElement();
         ManagersManager.Instance.Get<PlayerManager>().PlayerDied(this);
         ManagersManager.Instance.Get<UIManager>().PlayersPanel.PlayerDied(_playerHud);
         Destroy(gameObject);
