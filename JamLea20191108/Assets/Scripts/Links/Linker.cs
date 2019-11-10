@@ -67,6 +67,7 @@ public class Linker : MonoBehaviour, IInteractable
         if (canAddLink)
         {
             Link link = Instantiate(_linkPrefab);
+            link.transform.SetParent(transform);
             _links.Add(new LinkData(this, linkable, link));
             linkable.OnLink(this);
         }
