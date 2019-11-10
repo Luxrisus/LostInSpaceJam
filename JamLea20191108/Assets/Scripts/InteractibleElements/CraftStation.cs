@@ -11,7 +11,6 @@ public class CraftStation : ATransportableElement, IInteractable
 
     static private Dictionary<Resources, int> _resources;
 
-    private ObjectHolder _holder;
     private List<Blueprint> _blueprints = new List<Blueprint>();
     private int _numberOfCollisions = 0;
     private int _currentBlueprintIndex = 0;
@@ -31,8 +30,7 @@ public class CraftStation : ATransportableElement, IInteractable
 
         _craftWidgetCanvas.SetActive(false);
 
-        _holder = GetComponent<ObjectHolder>();
-        _holder.OnObjectTaken.AddListener(OnObjectTaken);
+        GetComponent<ObjectHolder>().OnObjectTaken.AddListener(OnObjectTaken);
     }
 
     void Start()
@@ -96,7 +94,7 @@ public class CraftStation : ATransportableElement, IInteractable
         if (plant)
         {
             // We can't put the plant in the craft station
-            _holder.RemoveTransportableElement();
+            GetComponent<ObjectHolder>().RemoveTransportableElement();
         }
         else
         {
