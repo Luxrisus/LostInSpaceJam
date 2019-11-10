@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+struct ColorCombination
+{
+    Color PrimaryColor;
+    Color SecondaryColor;
+}
+
 public class PlayerManager : AManager
 {
     [SerializeField]
     private List<Color> _playerColors = new List<Color>();
+    [SerializeField]
+    private List<ColorCombination> _playersColorsCombination = new List<ColorCombination>();
 
     private List<bool> _colorUsed = new List<bool>();
 

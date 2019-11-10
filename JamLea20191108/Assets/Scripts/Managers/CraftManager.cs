@@ -44,4 +44,9 @@ public class CraftManager : AManager
 
         return null;
     }
+
+    private void OnDestroy()
+    {
+        CraftStation.ResetCraftables();
+    }
 }

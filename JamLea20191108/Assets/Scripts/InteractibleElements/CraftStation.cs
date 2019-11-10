@@ -201,4 +201,10 @@ public class CraftStation : ATransportableElement
 
         _resources[resource.Display.Resource] += resource.Quantity;
     }
+
+    static public void ResetCraftables()
+    {
+        _resources.Clear();
+        _resources = null;
+    }
 }
