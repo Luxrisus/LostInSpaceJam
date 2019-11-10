@@ -292,7 +292,7 @@ PrefabInstance:
     - target: {fileID: 6364793004705442393, guid: e75a374bc94fa2245b0a66c00ca24d67,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.54
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 6364793004705442393, guid: e75a374bc94fa2245b0a66c00ca24d67,
         type: 3}
@@ -924,6 +924,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentElementInPossession: {fileID: 0}
+  OnObjectTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  OnObjectReleased:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1728117584
 PrefabInstance:
   m_ObjectHideFlags: 0
