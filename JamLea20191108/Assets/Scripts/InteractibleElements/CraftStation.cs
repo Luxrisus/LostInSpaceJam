@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CraftStation : ATransportableElement, IInteractable
+public class CraftStation : ATransportableElement
 {
     [SerializeField]
     private GameObject _craftWidgetCanvas = null;
@@ -24,7 +24,7 @@ public class CraftStation : ATransportableElement, IInteractable
         if (_resources == null)
         {
             _resources = new Dictionary<Resources, int>();
-            _resources.Add(Resources.Ice, 0);
+            _resources.Add(Resources.Ice, 2);
             _resources.Add(Resources.Wood, 0);
         }
 
@@ -36,15 +36,6 @@ public class CraftStation : ATransportableElement, IInteractable
     void Start()
     {
         _blueprints = ManagersManager.Instance.Get<CraftManager>().GetBlueprints();
-    }
-
-    public void DoInteraction(Player player)
-    {
-        ObjectHolder holder = player.GetComponent<ObjectHolder>();
-        if (holder != null)
-        {
-            player.GetComponent<ObjectHolder>().Take(this);
-        }
     }
 
     public void StartCraft(Player player)
@@ -102,11 +93,6 @@ public class CraftStation : ATransportableElement, IInteractable
             Destroy(element.gameObject);
             DisplayBlueprint();
         }
-    }
-
-    public bool CanInteract()
-    {
-        return true;
     }
 
     public bool CanCraft(Blueprint blueprint)

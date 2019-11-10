@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plant : ATransportableElement, IInteractable, ILinkable
+public class Plant : ATransportableElement, ILinkable
 {
     [SerializeField]
     private PlantOxygenHud _oxygenHud = null;
@@ -38,22 +38,6 @@ public class Plant : ATransportableElement, IInteractable, ILinkable
 
         _waterHud.WaterIndicator.fillAmount = (float)_waterComponent.WaterLevel / (float)_waterComponent.WaterMax;
     }
-
-    #region IInteractable
-    public void DoInteraction(Player player)
-    {
-        ObjectHolder holder = player.GetComponent<ObjectHolder>();
-        if (holder != null)
-        {
-            player.GetComponent<ObjectHolder>().Take(this);
-        }
-    }
-
-    public bool CanInteract()
-    {
-        return true;
-    }
-#endregion
 
     public void OnUnlink(Linker owner)
     {

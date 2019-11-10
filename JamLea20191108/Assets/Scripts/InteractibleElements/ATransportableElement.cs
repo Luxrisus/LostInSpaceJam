@@ -2,11 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ATransportableElement : MonoBehaviour
+public class ATransportableElement : MonoBehaviour, IInteractable
 {
     static Transform _levelLayout;
     ObjectHolder _holder = null;
     Rigidbody2D _rigidBody = null;
+
+    #region IInteractable
+    public void DoInteraction(Player player)
+    {
+        ObjectHolder holder = player.GetComponent<ObjectHolder>();
+        if (holder != null)
+        {
+            player.GetComponent<ObjectHolder>().Take(this);
+        }
+    }
+
+    public bool CanInteract()
+    {
+        return true;
+    }
+#endregion
 
     protected virtual void Awake()
     {
