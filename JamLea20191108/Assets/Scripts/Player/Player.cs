@@ -141,7 +141,7 @@ public class Player : MonoBehaviour, ILinkable
 
     public void OnMainAction(InputValue value)
     {
-        if (_craftStation != null)
+        if (_craftStation != null && !_objectHolder.HasObject())
         {
             if (value.isPressed)
             {

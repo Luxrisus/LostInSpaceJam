@@ -15,6 +15,8 @@ public class CraftStation : ATransportableElement, IInteractable
     private List<Blueprint> _blueprints = new List<Blueprint>();
     private int _numberOfCollisions = 0;
     private int _currentBlueprintIndex = 0;
+    private Coroutine _craftCor = null;
+    private Player _craftingPlayer = null;
 
     protected override void Awake()
     {
@@ -49,18 +51,40 @@ public class CraftStation : ATransportableElement, IInteractable
 
     public void StartCraft(Player player)
     {
-        Debug.Log("Start craft");
-        // Give the object to the player
-
-        // Start coroutine for the selected object
-        // Prevent a startCraft if the craft has already started
+        if (_craftCor == null && !player.GetComponent<ObjectHolder>().HasObject())
+        {
+            Blueprint blueprint = GetCurrentBlueprint();
+            if (CanCraft(blueprint))
+            {
+                Debug.Log("Start craft");
+                _craftingPlayer = player;
+                _craftCor = StartCoroutine(CraftCor(_craftingPlayer, blueprint));
+            }
+        }
     }
     
     public void StopCraft(Player player)
     {
-        Debug.Log("Stop craft");
-        // Stop only if it's done by the same player
-        // Start
+        if (player == _craftingPlayer && _craftCor != null)
+        {
+            Debug.Log("Stop craft");
+            StopCoroutine(_craftCor);
+        }
+    }
+
+    IEnumerator CraftCor(Player player, Blueprint blueprint)
+    {
+        float timer = 0f;
+        while (timer < blueprint.CraftTimeInSeconds)
+        {
+            timer += Time.deltaTime;
+            // TODO update the UI with ratio = timer / blueprint.CraftTimeInSeconds
+            yield return new WaitForEndOfFrame();
+        }
+
+        Debug.Log("Craft done");
+        // Remove ingredients
+        // Give the object to the player
     }
 
     void OnObjectTaken(ATransportableElement element)
@@ -83,6 +107,16 @@ public class CraftStation : ATransportableElement, IInteractable
         return true;
     }
 
+    public bool CanCraft(Blueprint blueprint)
+    {
+        return true;
+    }
+
+    public Blueprint GetCurrentBlueprint()
+    {
+        return _blueprints[_currentBlueprintIndex];
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<Player>() != null)
@@ -92,7 +126,7 @@ public class CraftStation : ATransportableElement, IInteractable
             if (_numberOfCollisions == 1)
             {
                 _craftWidgetCanvas.SetActive(true);
-                _craftWidget.Configure(_blueprints[_currentBlueprintIndex], _resources);
+                _craftWidget.Configure(GetCurrentBlueprint(), _resources);
             }
         }
     }
