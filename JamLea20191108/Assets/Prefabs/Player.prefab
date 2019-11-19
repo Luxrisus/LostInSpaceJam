@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _wholeBodyController: {fileID: 2526774363046372494}
   _bodyRenderer: {fileID: 1908999916849331449}
   _mainRenderer: {fileID: 122785081511968018}
   _secondaryRenderer: {fileID: 6913931785134866663}

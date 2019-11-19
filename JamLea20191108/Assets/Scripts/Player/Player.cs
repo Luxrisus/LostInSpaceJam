@@ -11,6 +11,9 @@ public class Player : MonoBehaviour, ILinkable
     private float _speed = 5f;
 
     [SerializeField]
+    private Transform _wholeBodyController = null;
+
+    [SerializeField]
     private SpriteRenderer _bodyRenderer = null;
     [SerializeField]
     private SpriteRenderer _mainRenderer = null;
@@ -27,6 +30,7 @@ public class Player : MonoBehaviour, ILinkable
     private List<GameObject> _interactablesElement = new List<GameObject>();
     private PlayerHud _playerHud;
     private CraftStation _craftStation = null;
+    private float _lastPositionX = 0f;
 
 #endregion
 
@@ -45,6 +49,28 @@ public class Player : MonoBehaviour, ILinkable
     {
         float ratio = (float)_oxygenComponent.OxygenLevel / (float)_oxygenComponent.OxygenMax;
         _playerHud?.SetFillRatio(ratio);
+
+        UpdateSpriteOrientation();
+    }
+
+    void UpdateSpriteOrientation()
+    {
+        if (_wholeBodyController.transform.position.x == _lastPositionX)
+        {
+            return;
+        }
+
+        float newYRotation = 0;
+
+        if (_wholeBodyController.transform.position.x < _lastPositionX)
+        {
+            newYRotation = 180;
+        }
+
+        Vector3 newRotation = new Vector3(0f, newYRotation, 0f);
+
+        _wholeBodyController.transform.localEulerAngles = newRotation;
+        _lastPositionX = _wholeBodyController.transform.position.x;
     }
 
     void FixedUpdate()

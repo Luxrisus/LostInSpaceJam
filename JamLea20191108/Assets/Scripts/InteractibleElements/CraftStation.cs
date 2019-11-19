@@ -204,7 +204,7 @@ public class CraftStation : ATransportableElement
 
     static public void ResetCraftables()
     {
-        _resources.Clear();
+        _resources?.Clear();
         _resources = null;
     }
 }
