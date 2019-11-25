@@ -500,7 +500,7 @@ MonoBehaviour:
   Blueprints:
   - {fileID: 11400000, guid: e7a9e244eab21db4281f1560928d110f, type: 2}
   BaseIngredients:
-  - Display: {fileID: 11400000, guid: 8255dea977cc6794eb248b1197eab598, type: 2}
+  - Display: {fileID: 0}
     Quantity: 2
 --- !u!1 &7903043450319520623
 GameObject:

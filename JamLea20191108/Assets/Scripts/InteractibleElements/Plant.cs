@@ -30,13 +30,16 @@ public class Plant : ATransportableElement, ILinkable
 
         _oxygenHud.OxygenIndicator.fillAmount = (float)_oxygenComponent.OxygenLevel / (float)_oxygenComponent.OxygenMax;
 
-        if (_waterComponent.WaterLevel <= 0)
+        if (_waterComponent)
         {
-            ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
-            Destroy(gameObject);
-        }
+            if (_waterComponent.WaterLevel <= 0)
+            {
+                ManagersManager.Instance.Get<LevelManager>().EndOfLevel(false);
+                Destroy(gameObject);
+            }
 
-        _waterHud.WaterIndicator.fillAmount = (float)_waterComponent.WaterLevel / (float)_waterComponent.WaterMax;
+            _waterHud.WaterIndicator.fillAmount = (float)_waterComponent.WaterLevel / (float)_waterComponent.WaterMax;
+        }
     }
 
     public bool AddWater(Water water)

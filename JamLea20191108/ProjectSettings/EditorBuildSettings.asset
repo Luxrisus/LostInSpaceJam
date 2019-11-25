@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level02OxygenAndCraft.unity
     guid: c09386515ad25dd4abe96a2c5b12468c
   - enabled: 1
+    path: Assets/Scenes/Level03PlantWithoutWater.unity
+    guid: 7327de010dffdc240aa31099553a0e87
+  - enabled: 1
+    path: Assets/Scenes/Level04FullGameplay.unity
+    guid: 1279d9b39859ac943920b2a7499e76ac
+  - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 9b163e7d27e504043adbbc8c5d921a48
   m_configObjects: {}
