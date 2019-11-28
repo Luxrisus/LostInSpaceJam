@@ -12,10 +12,11 @@ public class MenuEntry : MonoBehaviour
     private string _sceneName = "";
 
     private Color _currentColor;
+    private AudioSource _audioSource;
 
     void Start()
     {
-
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void Select()
@@ -31,6 +32,13 @@ public class MenuEntry : MonoBehaviour
 
     public void DoAction()
     {
+        _audioSource?.Play();
+        StartCoroutine(CoroutineDoAction());
+    }
+
+    IEnumerator CoroutineDoAction()
+    {
+        yield return new WaitForSeconds(0.25f);
         SceneManager.LoadScene(_sceneName, LoadSceneMode.Single);
     }
 }
