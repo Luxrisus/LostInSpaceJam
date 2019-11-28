@@ -8,6 +8,8 @@ public class ATransportableElement : MonoBehaviour, IInteractable
     ObjectHolder _holder = null;
     Rigidbody2D _rigidBody = null;
 
+    protected AudioSource _audioSource;
+
     #region IInteractable
     public virtual void DoInteraction(Player player)
     {
@@ -27,15 +29,23 @@ public class ATransportableElement : MonoBehaviour, IInteractable
     protected virtual void Awake()
     {
         _rigidBody = GetComponentInChildren<Rigidbody2D>();
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.volume = 0.5f;
 
         if (_levelLayout == null)
         {
             _levelLayout = FindObjectOfType<LevelLayoutHook>().transform;
         }
+
+        _audioSource.loop = false;
+        _audioSource.playOnAwake = false;
     }
 
     public virtual void Take(ObjectHolder holder)
     {
+        _audioSource.clip = ManagersManager.Instance.Get<SoundManager>().GetAudioClip(SoundName.ObjectPickup);
+        _audioSource.Play();
+
         if (_holder != null)
         {
             _holder.RemoveTransportableElement();
@@ -47,6 +57,9 @@ public class ATransportableElement : MonoBehaviour, IInteractable
 
     public virtual void Release()
     {
+        _audioSource.clip = ManagersManager.Instance.Get<SoundManager>().GetAudioClip(SoundName.ObjectDrop);
+        _audioSource.Play();
+
         _holder = null;
         this.transform.SetParent(_levelLayout);
         _rigidBody.simulated = true;

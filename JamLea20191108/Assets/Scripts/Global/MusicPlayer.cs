@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class MusicPlayer : MonoBehaviour
 {
     private AudioSource _audioSource;
-    
+
     [SerializeField]
-    private AudioClip _audioClip;
+    private AudioClip _audioClip = null;
 
     private void Awake()
     {

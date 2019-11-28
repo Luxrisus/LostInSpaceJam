@@ -38,7 +38,7 @@ public class MenuEntry : MonoBehaviour
 
     IEnumerator CoroutineDoAction()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.15f);
         SceneManager.LoadScene(_sceneName, LoadSceneMode.Single);
     }
 }

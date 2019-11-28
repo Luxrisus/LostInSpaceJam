@@ -14,6 +14,8 @@ public class Linker : MonoBehaviour, IInteractable
 
     float _distanceTotal = 0f;
 
+    private AudioSource _audioSource;
+
     public class LinkData
     {
         public Linker LinkStart;
@@ -37,7 +39,7 @@ public class Linker : MonoBehaviour, IInteractable
 
     void Start()
     {
-
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -66,6 +68,7 @@ public class Linker : MonoBehaviour, IInteractable
 
         if (canAddLink)
         {
+            _audioSource.Play();
             Link link = Instantiate(_linkPrefab);
             link.transform.SetParent(transform);
             _links.Add(new LinkData(this, linkable, link));
@@ -81,6 +84,7 @@ public class Linker : MonoBehaviour, IInteractable
 
         if (linkRemoved)
         {
+            _audioSource.Play();
             _links.Remove(data);
             Destroy(data.LinkObject.gameObject);
             linkable.OnUnlink(this);

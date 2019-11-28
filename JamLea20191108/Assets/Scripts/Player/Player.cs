@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour, ILinkable
 {
-#region variables
+    #region variables
+
+    private const float _kOxygenRatioForAlarm = 0.4f;
+
     [SerializeField]
     private float _speed = 5f;
 
@@ -31,12 +34,19 @@ public class Player : MonoBehaviour, ILinkable
     private PlayerHud _playerHud;
     private CraftStation _craftStation = null;
     private float _lastPositionX = 0f;
+    private AudioSource _audioSource;
+    private bool _isAudioPlaying = false;
 
 #endregion
 
     void Awake()
     {
         ManagersManager.Instance.Get<PlayerManager>().PlayerJoined(this);
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.volume = 0.5f;
+        _audioSource.playOnAwake = false;
+        _audioSource.loop = true;
+        _audioSource.clip = ManagersManager.Instance.Get<SoundManager>().GetAudioClip(SoundName.OxygenAlarmWithSilence);
     }
 
     void Start()
@@ -48,6 +58,18 @@ public class Player : MonoBehaviour, ILinkable
     void Update()
     {
         float ratio = (float)_oxygenComponent.OxygenLevel / (float)_oxygenComponent.OxygenMax;
+
+        if (!_isAudioPlaying && ratio <= _kOxygenRatioForAlarm)
+        {
+            _audioSource.Play();
+            _isAudioPlaying = true;
+        }
+        else if (_isAudioPlaying && ratio > _kOxygenRatioForAlarm)
+        {
+            _audioSource.Stop();
+            _isAudioPlaying = false;
+        }
+
         _playerHud?.SetFillRatio(ratio);
 
         UpdateSpriteOrientation();
@@ -55,7 +77,7 @@ public class Player : MonoBehaviour, ILinkable
 
     void UpdateSpriteOrientation()
     {
-        if (_wholeBodyController.transform.position.x == _lastPositionX)
+        if (transform.position.x == _lastPositionX)
         {
             return;
         }
@@ -70,7 +92,7 @@ public class Player : MonoBehaviour, ILinkable
         Vector3 newRotation = new Vector3(0f, newYRotation, 0f);
 
         _wholeBodyController.transform.localEulerAngles = newRotation;
-        _lastPositionX = _wholeBodyController.transform.position.x;
+        _lastPositionX = transform.position.x;
     }
 
     void FixedUpdate()

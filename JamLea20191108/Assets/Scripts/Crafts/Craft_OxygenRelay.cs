@@ -36,7 +36,7 @@ public class Craft_OxygenRelay : ACraftable
         }
     }
 
-     public void ConnectPlant(bool isConnecting, GameObject plant)
+    public void ConnectPlant(bool isConnecting, GameObject plant)
     {
         if (!CanConnectNewObject())
         {
