@@ -77,14 +77,14 @@ public class Player : MonoBehaviour, ILinkable
 
     void UpdateSpriteOrientation()
     {
-        if (transform.position.x == _lastPositionX)
+        if (transform.localPosition.x == _lastPositionX)
         {
             return;
         }
 
         float newYRotation = 0;
 
-        if (_wholeBodyController.transform.position.x < _lastPositionX)
+        if (transform.localPosition.x < _lastPositionX)
         {
             newYRotation = 180;
         }
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour, ILinkable
         Vector3 newRotation = new Vector3(0f, newYRotation, 0f);
 
         _wholeBodyController.transform.localEulerAngles = newRotation;
-        _lastPositionX = transform.position.x;
+        _lastPositionX = transform.localPosition.x;
     }
 
     void FixedUpdate()
@@ -266,6 +266,8 @@ public class Player : MonoBehaviour, ILinkable
         ManagersManager.Instance.Get<PlayerManager>().PlayerDied(this);
         ManagersManager.Instance.Get<UIManager>().PlayersPanel.PlayerDied(_playerHud);
 
+        _audioSource.Stop();
+        _audioSource.enabled = false;
         _bodyRenderer.enabled = false;
         _mainRenderer.enabled = false;
         _secondaryRenderer.enabled = false;
