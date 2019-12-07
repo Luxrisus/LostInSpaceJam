@@ -167,7 +167,7 @@ MonoBehaviour:
   RefillRatePerSecond: 10
   OxygenMovementDepletionFactor: 2
   Plugged: 0
-  OxygenMax: 10
+  OxygenMax: 15
 --- !u!114 &-3349879002408313688
 MonoBehaviour:
   m_ObjectHideFlags: 0
